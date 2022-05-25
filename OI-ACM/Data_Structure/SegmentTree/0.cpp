@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int MAX = 10000 + 5, INF = 0x29292929;
+const int MAX = 10000 + 5, INF = 0x3f3f3f3f;
 int n, dat[2 * MAX - 1];
 void init(int n_)
 {

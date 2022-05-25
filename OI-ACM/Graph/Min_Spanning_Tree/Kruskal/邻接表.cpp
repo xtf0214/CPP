@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int MAX_V = 100, INF = 0x29292929;
+const int MAX_V = 100, INF = 0x3f3f3f3f;
 int V, E;
 struct Edge
 {
@@ -22,7 +22,7 @@ int kruskal()
         if (find(e.u) != find(e.v))
         {
             sum += e.cost;
-            p[e.u] = e.v;
+            p[find(e.u)] = find(e.v);
         }
     return sum;
 }

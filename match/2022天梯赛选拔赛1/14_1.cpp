@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 int n, m, k, cost[MAX_V][MAX_V];
-const int MAX_V = 1000, INF = 0x29292929;
+const int MAX_V = 1000, INF = 0x3f3f3f3f;
 struct Node
 {
     int d = INF, id;

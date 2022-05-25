@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int  MAX_V = 100,INF = 0x29292929;
+const int  MAX_V = 100,INF = 0x3f3f3f3f;
 int V, E;
 int cost[MAX_V][MAX_V];
 

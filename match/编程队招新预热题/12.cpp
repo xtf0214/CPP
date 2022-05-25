@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stack>
 using namespace std;
-const int INF = 0x29292929;
+const int INF = 0x3f3f3f3f;
 int calc(int n2, char op, int n1)
 {
     switch (op)
