@@ -14,10 +14,6 @@ int main()
             if (a[j - 1] > a[j])
                 Swap(&a[j - 1], &a[j]);
     for (int i = 0; i < 3; i++)
-    {
-        if (i)
-            printf(" ");
-        printf("%d", a[str[i] - 'A']);
-    }
+        printf("%d%c", a[str[i] - 'A']," "[i==2]);
     return 0;
 }

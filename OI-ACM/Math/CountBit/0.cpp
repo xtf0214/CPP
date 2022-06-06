@@ -20,3 +20,12 @@ int count1(int x)
     }
     return res;
 }
+int count2(int x)
+{
+    int res = 0;
+    while (x)
+    {
+        x = x & (x - 1);
+        res++;
+    }
+}
