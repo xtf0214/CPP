@@ -7,8 +7,7 @@ void dfs(int k, int m, int n, int st)
     if (k == m)
     {
         for (int i = 0; i < m; i++)
-            cout << x[i] << " ";
-        cout << endl;
+            cout << x[i] << " \n"[i == m - 1];
         return;
     }
     for (int i = st; i < n; i++)

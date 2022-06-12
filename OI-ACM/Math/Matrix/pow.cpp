@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <graphics.h>
 using namespace std;
 const int MAX = 10005;
 typedef vector<vector<int>> matrix;
@@ -36,10 +35,7 @@ int main()
             cin >> A[i][j];
     A = A * A;
     for (int i = 0; i < n; i++)
-    {
         for (int j = 0; j < n; j++)
-            cout << A[i][j] << " ";
-        cout << endl;
-    }
+            cout << A[i][j] << " \n"[j == n - 1];
     return 0;
 }

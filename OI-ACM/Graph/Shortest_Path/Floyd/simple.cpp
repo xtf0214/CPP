@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int  MAX_V = 100,INF = 0x3f3f3f3f;
+const int MAX_V = 100, INF = 0x3f3f3f3f;
 int V, E;
 int cost[MAX_V][MAX_V];
 
@@ -30,16 +30,19 @@ int main()
     if (negative)
         cout << "NEGATIVE CYCLE" << endl;
     else
+        // for (int i = 0; i < V; i++)
+        // {
+        //     for (int j = 0; j < V; j++)
+        //     {
+        //         if (j)
+        //             cout << " ";
+        //         cost[i][j] == INF ? (cout << "INF") : (cout << cost[i][j]);
+        //     }
+        //     cout << endl;
+        // }
         for (int i = 0; i < V; i++)
-        {
             for (int j = 0; j < V; j++)
-            {
-                if (j)
-                    cout << " ";
-                cost[i][j] == INF ? (cout << "INF") : (cout << cost[i][j]);
-            }
-            cout << endl;
-        }
+                (cost[i][j] == INF ? (cout << "INF") : (cout << cost[i][j])), cout << " \n"[j == V - 1];
     return 0;
 }
 /*

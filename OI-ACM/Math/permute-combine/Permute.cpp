@@ -6,8 +6,7 @@ void permute(int k, int m, int n)
 	if (k == 0)
 	{
 		for (int i = 0; i < m; i++)
-			cout << t[i] << " ";
-		cout << endl;
+			cout << t[i] << " \n"[i == m - 1];
 		return;
 	}
 	for (int i = 0; i < n; i++)

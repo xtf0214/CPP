@@ -7,8 +7,7 @@ void Permutation(int step)
     if (step == m)
     {
         for (int i = 0; i < m; i++)
-            printf("%3d", A[t[i]]);
-        cout << endl;
+            printf("%3d%c", A[t[i]]), "\n"[i != m - 1];
         return;
     }
     for (int i = t[(step - 1) >= 0 ? (step - 1) : 0]; i < n; i++)

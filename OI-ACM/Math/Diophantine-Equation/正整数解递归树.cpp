@@ -9,8 +9,7 @@ void dfs(int k, int m, int n)
     if (k == 1)
     {
         x[k] = n;
-        printf("%d_%d_%d", k, n, cnt[k]); //打印信息
-        cout << endl;
+        printf("%d_%d_%d\n", k, n, cnt[k]); //打印信息
         return;
     }
     for (int i = 1; i <= n - k + 1; i++)

@@ -1,21 +1,18 @@
 #include <iostream>
 using namespace std;
-void dfs(int n, char from, char to)
+void hanoi(int n, char from, char mid, char to)
 {
-    if (n == 1)
-    {
-        printf("1: %c -> %c\n", from, to);
+    if (n == 0)
         return;
-    }
-    char mid = 'A' + 'B' + 'C' - from - to;
-    dfs(n - 1, from, mid);
+    hanoi(n - 1, from, to, mid);
     printf("%d: %c -> %c\n", n, from, to);
-    dfs(n - 1, mid, to);
+    hanoi(n - 1, mid, from, to);
 }
 int main()
 {
     int n;
-    cin >> n;
-    dfs(n, 'A', 'C');
+    char from, mid, to;
+    cin >> n >> from >> to >> mid;
+    hanoi(n, from, mid, to);
     return 0;
 }

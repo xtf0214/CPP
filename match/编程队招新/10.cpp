@@ -11,11 +11,8 @@ vector<vector<bool>> vis(n, vector<bool>(m, -1));
 void printMap()
 {
     for (int y = 0; y < n; y++)
-    {
         for (int x = 0; x < m; x++)
-            cout << map[y][x] << " ";
-        cout << endl;
-    }
+            cout << map[y][x] << " \n"[x == m - 1];
 }
 int main()
 {

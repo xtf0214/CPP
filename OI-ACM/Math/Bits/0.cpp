@@ -6,8 +6,7 @@ void dfs(int k)
 	if (k == m)
 	{
 		for (int i = 0; i < m; i++)
-			cout << t[i] << " ";
-		cout << endl;
+			cout << t[i] << " "[i == m - 1];
 		return;
 	}
 	t[k] = 0;

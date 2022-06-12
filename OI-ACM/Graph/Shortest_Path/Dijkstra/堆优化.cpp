@@ -26,10 +26,7 @@ void dijkstra(int s)
             continue;
         for (Edge e : adjs[u])
             if (d[e.to] > d[u] + e.cost)
-            {
-                d[e.to] = d[u] + e.cost;
-                que.push({d[e.to], e.to});
-            }
+                que.push({d[e.to] = d[u] + e.cost, e.to});
     }
 }
 int main()

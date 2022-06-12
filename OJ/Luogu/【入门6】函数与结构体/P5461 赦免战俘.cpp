@@ -26,9 +26,6 @@ int main()
             A[y][x] = 1;
     fill(1, 1, l);
     for (int y = 1; y <= l; y++)
-    {
         for (int x = 1; x <= l; x++)
-            cout << A[y][x]<<" ";
-        cout << endl;
-    }
+            cout << A[y][x] << " \n"[x == l];
 }

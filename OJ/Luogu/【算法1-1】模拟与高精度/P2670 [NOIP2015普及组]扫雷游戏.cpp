@@ -25,8 +25,8 @@ int main()
                     for (int tx = -1; tx <= 1; tx++)
                     {
                         if (ty == 0 && tx == 0)
-                            continue; //3*3-1=8个方向
-                        if (!OverEdge(x + tx, y + ty))  
+                            continue; // 3*3-1=8个方向
+                        if (!OverEdge(x + tx, y + ty))
                             if (Map[y + ty][x + tx] != '*') //非雷的格子计数
                                 N[y + ty][x + tx]++;
                     }
@@ -42,5 +42,8 @@ int main()
         }
         cout << endl;
     }
+    for (int y = 1; y <= n; y++)
+        for (int x = 1; x <= m; x++)
+            (N[y][x] == -1 ? (cout << '*') : (cout << N[y][x])), cout << "\n"[x != m];
     return 0;
 }
