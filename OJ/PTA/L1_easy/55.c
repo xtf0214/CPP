@@ -1,3 +1,4 @@
+// 7-55 统计非负整数二进制展开中数位1的总数
 #include <stdio.h>
 int main()
 {
@@ -8,7 +9,6 @@ int main()
         s += n & 1 ? 1 : 0;
         n = n >> 1;
     }
-
     // while (n > 0)
     // {
     //     n -= (n & -n);

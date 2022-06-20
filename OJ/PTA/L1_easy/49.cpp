@@ -1,3 +1,4 @@
+// 7-49 汉诺塔问题
 #include <iostream>
 using namespace std;
 void hanoi(int n, char from, char mid, char to)

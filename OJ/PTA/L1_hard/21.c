@@ -1,4 +1,4 @@
-// 找鞍点
+// 7-21 找鞍点
 #include <stdio.h>
 int main()
 {
@@ -9,6 +9,7 @@ int main()
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
             scanf("%d", &a[i][j]);
+    // 行最大值和列最小值可以同时查找
     for (int i = 0; i < n; i++)
     {
         max_line[i] = a[i][0];

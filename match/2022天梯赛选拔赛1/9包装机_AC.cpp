@@ -1,15 +1,22 @@
 #include <iostream>
 #include <stack>
+#include <queue>
 using namespace std;
-string a[105];
-int top[105]; //可以考虑使用队列优化
-int n, m, s_max, op;
+const int MAX = 100 + 5;
 int main()
 {
     stack<char> s;
+    queue<char> q[MAX];
+    string t;
+    int n, m, s_max, op;
     cin >> n >> m >> s_max;
+    cin.get();
     for (int i = 1; i <= n; i++)
-        cin >> a[i];
+    {
+        getline(cin, t);
+        for (char c : t)
+            q[i].push(c);
+    }
     while (cin >> op && op != -1)
     {
         if (op == 0)
@@ -20,17 +27,15 @@ int main()
                 s.pop();
             }
         }
-        else
+        else if (!q[op].empty())
         {
-            if (top[op] < a[op].size())
+            if (s.size() >= s_max)
             {
-                if (s.size() >= s_max)
-                {
-                    cout << s.top();
-                    s.pop();
-                }
-                s.push(a[op][top[op]++]);
+                cout << s.top();
+                s.pop();
             }
+            s.push(q[op].front());
+            q[op].pop();
         }
     }
     return 0;

@@ -1,6 +1,6 @@
+// 7-86 N个数求和
 #include <stdio.h>
 #include <math.h>
-using namespace std;
 int gcd(int a, int b) { return b ? gcd(b, a % b) : a; }
 int main()
 {

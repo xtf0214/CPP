@@ -1,3 +1,4 @@
+// 7-54 孤单的数
 #include <bits/stdc++.h>
 using namespace std;
 string a[100010], str;

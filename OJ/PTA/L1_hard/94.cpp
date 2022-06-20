@@ -1,3 +1,4 @@
+// 7-94 出栈序列的合法性
 #include <bits/stdc++.h>
 using namespace std;
 int main()
