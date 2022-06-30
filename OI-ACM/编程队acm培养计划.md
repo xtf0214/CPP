@@ -12,8 +12,6 @@
 https://pintia.cn/home/account?c=29ab51b9c9e3cb62&u=2021级程序设计
 ```
 
-
-
 从这周开始，每周会选择十余个题目拿来给大家练习，督促大家在暑假时学习提升自己编程能力。每周一会增加新的题目，周末下午组织大家把好的思路分享出来互相学习，余老师也会参与。感兴趣的同学可以在”PTA个人中心-账号-应邀做题“接收邀请。PTA邀请码：29ab51b9c9e3cb62
 
 ### 题目列表
@@ -44,6 +42,14 @@ https://pintia.cn/home/account?c=29ab51b9c9e3cb62&u=2021级程序设计
 9. **7-94 出栈序列的合法性**
 10. **包装机**
 
+#### 0x3
+
+1.
+
+2.
+
+
+
 ## 学习内容
 
 ### 模拟、高精度、暴力枚举
@@ -65,7 +71,7 @@ https://pintia.cn/home/account?c=29ab51b9c9e3cb62&u=2021级程序设计
 * 栈、队列、链表
 * 树、二叉树
 * STL容器：vector、stack、queue、list
-* 二分查找。STL算法：binary_serach、lower_bound、upper_bound
+* 二分查找。STL算法：binary_search、lower_bound、upper_bound
 
 ### 基础数据结构2
 

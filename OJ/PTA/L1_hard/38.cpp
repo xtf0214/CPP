@@ -10,7 +10,7 @@ int main()
         int sum = 0;
         for (int j = 0; j < 8; j++)
             sum += (s[i * 8 + j] - 48) << (7 - j);
-        printf("%d%c",sum, ".\n"[i==3]);
+        printf("%d%c", sum, ".\n"[i == 3]);
     }
     return 0;
 }
