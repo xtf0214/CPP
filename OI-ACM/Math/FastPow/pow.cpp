@@ -4,12 +4,11 @@ typedef long long ll;
 ll pow(ll x, ll n)
 {
     ll s = 1;
-    while (n)
+    for (; n; n >>= 1)
     {
         if (n & 1)
             s = s * x;
         x = x * x;
-        n >>= 1;
     }
     return s;
 }
