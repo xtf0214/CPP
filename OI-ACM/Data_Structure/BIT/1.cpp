@@ -6,20 +6,14 @@ int a[MAX], c[MAX], n;
 int sum(int x)
 {
     int res = 0;
-    while (x)
-    {
+    for (; x; x -= lowbit(x))
         res += c[x];
-        x -= lowbit(x);
-    }
     return res;
 }
 void add(int x, int d)
 {
-    while (x <= n)
-    {
+    for (; x <= n; x += lowbit(x))
         c[x] += d;
-        x += lowbit(x);
-    }
 }
 int query(int l, int r) { return sum(r) - sum(l - 1); }
 int main()
