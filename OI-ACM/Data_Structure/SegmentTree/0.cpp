@@ -1,40 +1,56 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cmath>
+#define op(x, y) x + y
 using namespace std;
-const int MAX = 10000 + 5, INF = 0x3f3f3f3f;
-int n, dat[2 * MAX - 1];
-void init(int n_)
+class SegmentTree
 {
-    n = 1;
-    while (n < n_)
-        n *= 2;
-    fill(dat, dat + 2 * n - 1, INF);
-}
-void update(int k, int a)
-{
-    k += n - 1;
-    dat[k] = a;
-    while (k)
+private:
+    int n;
+    int *dat;
+    inline int ls(int p) { return p * 2 + 1; }
+    inline int rs(int p) { return p * 2 + 2; }
+
+public:
+    SegmentTree(int a[], int len)
     {
-        k = (k - 1) / 2;
-        dat[k] = min(dat[k * 2 + 1], dat[k * 2 + 2]);
+        n = len & (len - 1) ? 1 << (32 - __builtin_clz(len)) : len;
+        // n = 1 << int(ceil(log(len) / log(2)));
+        dat = new int[n << 1]{0};
+        for (int i = 0; i < len; i++)
+            dat[i + n - 1] = a[i];
+        for (int p = n - 2; p >= 0; p--)
+            dat[p] = op(dat[ls(p)], dat[rs(p)]);
     }
-}
-int query(int a, int b, int k, int l, int r)
-{
-    if (r <= a || l >= b)
-        return INF;
-    if (a <= l && b >= r)
-        return dat[k];
-    else
+    // 单点修改
+    void update(int k, int a)
     {
-        int vl = query(a, b, k * 2 + 1, l, (l + r) / 2);
-        int vr = query(a, b, k * 2 + 2, (l + r) / 2, r);
-        return min(vl, vr);
+        dat[k += n - 1] = a;
+        for (int p = (k - 1) / 2; p != -1; p = (p - 1) / 2)
+            dat[p] = op(dat[ls(p)], dat[(rs(p))]);
     }
-}
+    // 区间查询[a,b]
+    int query(int a, int b) { return query(a, b, 0, 0, n); }
+    int query(int a, int b, int p, int l, int r)
+    {
+        if (a >= r || b <= l)
+            return 0;
+        if (a <= l && b >= r)
+            return dat[p];
+        int m = (l + r) / 2;
+        int vl = query(a, b, ls(p), l, m);
+        int vr = query(a, b, rs(p), m, r);
+        return op(vl, vr);
+    }
+};
 
 int main()
 {
-    
+    int n;
+    cin >> n;
+    int *a = new int[n];
+    for (int i = 0; i < n; i++)
+        a[i] = 1;
+    SegmentTree T(a, n);
+    cout << T.query(0, n) << endl;
     return 0;
 }

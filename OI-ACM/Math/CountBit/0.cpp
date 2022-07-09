@@ -5,6 +5,7 @@ int count0(int x)
     int res = 0;
     while (x)
     {
+        // 减去低位1
         x -= (-x & x);
         res++;
     }
@@ -25,6 +26,7 @@ int count2(int x)
     int res = 0;
     while (x)
     {
+        // 去掉低位1的结果
         x = x & (x - 1);
         res++;
     }

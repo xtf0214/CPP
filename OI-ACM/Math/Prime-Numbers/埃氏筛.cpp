@@ -8,7 +8,7 @@ void eratosthenes(int n)
 {
     memset(isPrime, 1, sizeof(isPrime));
     isPrime[1] = 0;
-    for (int i = 2; i * i <= n; i++)
+    for (int i = 2; i <= n; i++)
         if (isPrime[i])
         {
             Prime[cnt++] = i;
@@ -22,6 +22,6 @@ int main()
     cin >> n;
     eratosthenes(n);
     for (int i = 0; i < cnt; i++)
-            cout << Prime[i] << " ";
+        cout << Prime[i] << " ";
     return 0;
 }
