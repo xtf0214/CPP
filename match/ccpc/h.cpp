@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#define op(x, y) x + y
+#define op(x, y) max(x, y)
 using namespace std;
 class SegmentTree
 {
@@ -14,7 +14,6 @@ public:
     SegmentTree(int a[], int len)
     {
         n = len & (len - 1) ? 1 << (32 - __builtin_clz(len)) : len;
-        // n = 1 << int(ceil(log(len) / log(2)));
         dat = new int[n << 1]{0};
         for (int i = 0; i < len; i++)
             dat[i + n] = a[i];
@@ -24,7 +23,7 @@ public:
     // 单点修改
     void update(int k, int a)
     {
-        dat[k += n] = a;
+        dat[k += n - 1] = a;
         for (int p = k >> 1; p; p >>= 1)
             dat[p] = op(dat[ls(p)], dat[(rs(p))]);
     }
@@ -41,16 +40,27 @@ public:
         int vr = query(a, b, rs(p), m + 1, r);
         return op(vl, vr);
     }
+    int &operator[](int i) { return dat[i + n - 1]; }
 };
 
 int main()
 {
-    int n;
-    cin >> n;
-    int *a = new int[n];
-    for (int i = 0; i < n; i++)
-        a[i] = 1;
-    SegmentTree T(a, n);
-    cout << T.query(1, n) << endl;
+    int n, m, l, r;
+    cin >> n >> m;
+    int *a = new int[n + 1];
+    for (int i = 1; i <= n; i++)
+        cin >> a[i];
+    SegmentTree T(a + 1, n);
+    while (m--)
+    {
+        cin >> l >> r;
+        for (int i = l; i <= r; i++)
+            T.update(i, min(i - l + 1, a[i]));
+        // for (int i = 1; i <= n; i++)
+        //     cout << T[i] << " \n"[i == n];
+        cout << T.query(l, r) << " ";
+        for (int i = l; i <= r; i++)
+            T.update(i, a[i]);
+    }
     return 0;
 }
