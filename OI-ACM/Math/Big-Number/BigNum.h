@@ -1,9 +1,9 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+using std::max;
 using std::ostream;
 using std::string;
-using std::max;
 using std::to_string;
 
 using typebit = int;
@@ -15,18 +15,18 @@ class BigNum
     // 2^n figure: log(10,2)*n ≈ n/3
     // fib(n) figure: -log(10,5)/2+n*log(10,(1+√5)/2) ≈ n/5
     typelen len;
-    typebit* num;
+    typebit *num;
 
 public:
     BigNum(long long x = 0)
     {
-        num = new typebit[1000000]{ 0 };
+        num = new typebit[1000000]{0};
         len = 1;
         for (; x; len++)
             num[len] = x % 10, x /= 10;
         len--;
     }
-    typebit& operator[](typelen i) { return num[i]; }
+    typebit &operator[](typelen i) { return num[i]; }
     void flatten(typelen l)
     {
         len = l;
@@ -35,7 +35,7 @@ public:
         while (!num[len])
             len--;
     }
-    friend ostream& operator<<(ostream& out, const BigNum& t)
+    friend ostream &operator<<(ostream &out, const BigNum &t)
     {
         if (t.len == 0)
             return (out << 0);
@@ -51,6 +51,11 @@ public:
             c[i] += num[i] + b[i];
         c.flatten(c.len + 1);
         return c;
+    }
+    void operator+=(typebit b)
+    {
+        num[1] += b;
+        flatten(len + 1);
     }
     BigNum operator*(typebit b)
     {

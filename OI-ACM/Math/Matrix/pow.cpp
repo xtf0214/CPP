@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int MAX = 10005;
-typedef vector<vector<int>> matrix;
-typedef long long ll;
+using matrix = vector<vector<int>>;
+using ll = long long;
 matrix operator*(matrix &A, matrix &B)
 {
     matrix C(A.size(), vector<int>(B[0].size()));
