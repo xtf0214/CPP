@@ -42,7 +42,7 @@ int main()
         // }
         for (int i = 0; i < V; i++)
             for (int j = 0; j < V; j++)
-                (cost[i][j] == INF ? (cout << "INF") : (cout << cost[i][j])), cout << " \n"[j == V - 1];
+                cout << (cost[i][j] == INF ? "INF" : to_string(cost[i][j])) << " \n"[j == V - 1];
     return 0;
 }
 /*
