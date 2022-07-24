@@ -22,7 +22,7 @@ public:
             dat[p] = op(dat[ls(p)], dat[rs(p)]);
     }
     // 单点修改
-    void update(int k, int a)
+    void update(int k, T a)
     {
         dat[k += n - 1] = a;
         for (int p = (k - 1) / 2; p != -1; p = (p - 1) / 2)
@@ -53,7 +53,7 @@ int main()
     cin >> n;
     int *a = new int[n];
     for (int i = 0; i < n; i++)
-        a[i] = (i + 1) * 6;
+        a[i] = i;
     SegmentTree<int, op, 0> ST(a, n);
     cout << ST.query(0, n) << endl;
     return 0;

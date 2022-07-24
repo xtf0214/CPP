@@ -3,7 +3,7 @@
 using namespace std;
 const int MAX = 10000 + 5;
 int a[MAX], c[MAX], n;
-int sum(int x)
+int getSum(int x)
 {
     int res = 0;
     for (; x; x -= lowbit(x))
@@ -15,7 +15,7 @@ void add(int x, int d)
     for (; x <= n; x += lowbit(x))
         c[x] += d;
 }
-int query(int l, int r) { return sum(r) - sum(l - 1); }
+int query(int l, int r) { return getSum(r) - getSum(l - 1); }
 int main()
 {
     n = 16;
