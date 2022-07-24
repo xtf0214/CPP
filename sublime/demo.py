@@ -7,9 +7,9 @@ test_exe = "D:\Code\CPP\Match\Codeforces\Round132\B.exe"
 def makeData(n):
     for i in range(1, n + 1):
         test_data = IO(file_prefix="test", data_id=i, disable_output=True)
-        n = randint(2, 10)
-        m = randint(1, 10)
-        high = Vector.random(n, [(1, 10)], 1)
+        n = randint(1, int(1e5))
+        m = randint(1, int(1e5))
+        high = Vector.random(n, [(1, int(4e6))], 1)
         test_data.input_writeln(n, m)
         test_data.input_writeln(high)
         for i in range(m):
@@ -29,5 +29,5 @@ def cmpProgram(n):
             print("Wrong Answer:", input_file)
 
 
-# makeData(5)
-cmpProgram(5)
+makeData(5)
+# cmpProgram(5)

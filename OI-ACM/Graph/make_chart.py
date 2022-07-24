@@ -50,7 +50,7 @@ def Tree(filename):
             print("{}---{}".format(u, v))
 
 
-filename = r'D:/Code/cpp/OI-ACM/Graph/Connectivity/Undirected_Graph/VE2.in'
-print("```mermaid/nflowchart LR")
-UndirectedGraph(filename)
+filename = r'D:\Code\CPP\OI-ACM\Graph\1.in'
+print("```mermaid\nflowchart LR")
+WeightGraph(filename)
 print("```")
