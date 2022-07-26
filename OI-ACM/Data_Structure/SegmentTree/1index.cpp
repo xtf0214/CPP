@@ -32,7 +32,7 @@ public:
     T query(int a, int b, int p, int l, int r)
     {
         if (a > r || b < l)
-            return 0;
+            return e;
         if (a <= l && b >= r)
             return dat[p];
         int m = (l + r) / 2;

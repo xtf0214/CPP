@@ -8,7 +8,7 @@ private:
     vector<T> dat, tag;
     int ls(int p) { return p << 1; }
     int rs(int p) { return p << 1 | 1; }
-    void mark(int p, int l, int r, int k) { tag[p] += k, dat[p] += k * (r - l + 1); }
+    void mark(int p, int l, int r, int k) { tag[p] += l == r ? 0 : k, dat[p] += k * (r - l + 1); }
     void push_down(int p, int l, int r)
     {
         int m = (l + r) >> 1;
@@ -28,12 +28,12 @@ public:
         for (int i = n - 1; i >= 1; i--)
             dat[i] = op(dat[ls(i)], dat[rs(i)]);
     }
-    void update(int i, int k) { return update(i, i, k, 1, 1, n); }
+    void update(int i, int k) { update(i, i, k, 1, 1, n); }
     void update(int s, int t, int k) { update(s, t, k, 1, 1, n); }
     void update(int s, int t, int k, int p, int l, int r)
     {
         if (s <= l && r <= t)
-            return void(mark(p, l, r, k));
+            return mark(p, l, r, k);
         push_down(p, l, r);
         int m = (l + r) >> 1;
         if (s <= m)
@@ -46,7 +46,7 @@ public:
     T query(int s, int t, int p, int l, int r)
     {
         if (s > r || t < l)
-            return 0;
+            return e;
         if (s <= l && r <= t)
             return dat[p];
         push_down(p, l, r);

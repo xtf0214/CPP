@@ -27,7 +27,7 @@ inline void push_down(int p, int l, int r)
 void update(int nl, int nr, int k, int p = 1, int l = 1, int r = n)
 {
     if (nl <= l && r <= nr)
-        return void(mark(p, l, r, k));
+        return mark(p, l, r, k);
     push_down(p, l, r);
     int m = (l + r) >> 1;
     if (nl <= m)
