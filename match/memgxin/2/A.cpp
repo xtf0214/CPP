@@ -1,17 +1,15 @@
 // 妙手
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 int main()
 {
-    int a, b;
-    cin >> a >> b;
-    if (a == 1 && b == 1)
-    {
-        puts("No");
-        return 0;
-    }
-    if (__gcd(a, b) == 1)
-        puts("Yes");
+    ll n, m;
+    cin >> n >> m;
+    if ((n + m) % 2 && __gcd(n, m) == 1)
+        cout << "Yes";
     else
-        puts("No");
+        cout << "No";
+
+    return 0;
 }

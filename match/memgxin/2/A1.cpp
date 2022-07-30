@@ -2,7 +2,7 @@
 using namespace std;
 const int MAXN = 51;
 int G[MAXN][MAXN] = {0};
-int d1 = 3, d2 = 6;
+int d1 = 3, d2 = 5;
 int vec[4][2] = {{d1, d2}, {d1, -d2}, {-d1, -d2}, {-d1, d2}};
 bool layer[100];
 int tx, ty;
