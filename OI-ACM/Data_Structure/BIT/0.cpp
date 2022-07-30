@@ -10,14 +10,10 @@ class BIT
 {
 private:
     int n;
-    T *dat; 
+    vector<T> dat;
 
 public:
-    BIT(int len = 0)
-    {
-        n = len, dat = new T[len + 1];
-        fill(dat, dat + n + 1, e);
-    }
+    BIT(int len = 0) { n = len, dat.assign(n + 1, e); }
     void add(int x, int d)
     {
         for (; x <= n; x += lowbit(x))
@@ -26,10 +22,10 @@ public:
     T getSum(int x)
     {
         T res = 0;
-        for (; x; x -= lowbit(x)) 
+        for (; x; x -= lowbit(x))
             res += dat[x]; // dat[i] 保存了lowbit(i)个数
         return res;
-    }  
+    }
     T query(int l, int r) { return getSum(r) - getSum(l - 1); }
 };
 

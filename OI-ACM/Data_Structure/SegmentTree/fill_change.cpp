@@ -8,7 +8,7 @@ private:
     vector<T> dat, tag;
     int ls(int p) { return p << 1; }
     int rs(int p) { return p << 1 | 1; }
-    void mark(int p, int l, int r, int k) { tag[p] += l == r ? 0 : k, dat[p] += k * (r - l + 1); }
+    void mark(int p, int l, int r, int k) { l == r ? 0 : tag[p] = k, dat[p] = k * (r - l + 1); }
     void push_down(int p, int l, int r)
     {
         int m = (l + r) >> 1;
@@ -22,19 +22,21 @@ public:
     {
         int len = arr.size();
         n = len & (len - 1) ? 1 << std::__lg(len) + 1 : len;
-        dat = vector<T>(2 * n, e);
-        tag = vector<T>(2 * n, 0);
+        dat.assign(2 * n, e);
+        tag.assign(2 * n, 0);
         copy(arr.begin(), arr.end(), dat.begin() + n);
         for (int i = n - 1; i >= 1; i--)
             dat[i] = op(dat[ls(i)], dat[rs(i)]);
     }
+    T &operator[](int i) { return dat[i + n - 1]; }
     void update(int i, int k) { update(i, i, k, 1, 1, n); }
     void update(int s, int t, int k) { update(s, t, k, 1, 1, n); }
     void update(int s, int t, int k, int p, int l, int r)
     {
         if (s <= l && r <= t)
             return mark(p, l, r, k);
-        push_down(p, l, r);
+        if (tag[p])
+            push_down(p, l, r);
         int m = (l + r) >> 1;
         if (s <= m)
             update(s, t, k, ls(p), l, m);
@@ -49,7 +51,8 @@ public:
             return e;
         if (s <= l && r <= t)
             return dat[p];
-        push_down(p, l, r);
+        if (tag[p])
+            push_down(p, l, r);
         int m = (l + r) >> 1;
         T vl = query(s, t, ls(p), l, m);
         T vr = query(s, t, rs(p), m + 1, r);
