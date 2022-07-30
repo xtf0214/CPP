@@ -1,26 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int MAX = 10000 + 5;
+using pii = pair<int, int>;
+const int MAX = 2e5 + 5;
 int main()
 {
-    int arr[MAX];
+    pii arr[MAX];
+    int ans[6]{0};
     int n, m, i;
     cin >> n >> m;
+
     for (int i = 1; i <= n; i++)
-        arr[i] = n + 1 - i;
-    list<int> a(arr + 1, arr + n + 1);
-    while (m--)
+        arr[i].first = i, arr[i].second = i;
+    for (int j = 1; j <= m;j++)
     {
         cin >> i;
-        a.remove(i);
-        a.push_front(i);
+        arr[i].second = n + j;
     }
-    i = 0;
-    vector<int> ans;
-    for (auto it = a.begin(); i < 5; i++, it++)
-        ans.push_back(*it);
-    sort(ans.begin(), ans.end());
-    for (int i = 0; i < 5; i++)
-        cout << ans[i] << " \n"[i == 4];
+    sort(arr + 1, arr + n + 1, [](const pii &a, const pii &b)
+         { return a.second < b.second; });
+    for (int i = 1; i <= 5;i++)
+        ans[i] = arr[i].first;
+    sort(ans + 1, ans + 6);
+    for (int i = 1; i <= 5; i++)
+        cout << ans[i] << " \n"[i == 5];
     return 0;
 }
