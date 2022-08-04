@@ -1,6 +1,4 @@
 #include <bits/stdc++.h>
-#define y first
-#define x second
 using namespace std;
 using pii = pair<int, int>;
 using Node = pair<int, pii>;
@@ -19,19 +17,19 @@ void solve()
     d[0][0] = 0;
     while (!q.empty())
     {
-        auto t = q.top().second;
+        auto [cy, cx] = q.top().second;
         q.pop();
-        if (vis[t.y][t.x])
+        if (vis[cy][cx])
             continue;
-        vis[t.y][t.x] = true;
-        for (auto i : vec)
+        vis[cy][cx] = true;
+        for (auto &[ny, nx] : vec)
         {
-            int ty = t.y + i[0], tx = t.x + i[1];
+            int ty = cy + nx, tx = cx + ny;
             if (ty < 0 || ty >= n || tx < 0 || tx >= m || G[ty][tx] == '#')
                 continue;
             int cost = G[ty][tx] != '*';
-            if (d[ty][tx] > d[t.y][t.x] + cost)
-                q.push({d[ty][tx] = d[t.y][t.x] + cost, {ty, tx}});
+            if (d[ty][tx] > d[cy][cx] + cost)
+                q.push({d[ty][tx] = d[cy][cx] + cost, {ty, tx}});
         }
     }
     cout << ((d[n - 1][m - 1] == INF) ? -1 : d[n - 1][m - 1]) << endl;

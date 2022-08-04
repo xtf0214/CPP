@@ -2,11 +2,8 @@
 using namespace std;
 int n, m;
 int dis[5000005];
-int id(int x, int y)
-{
-    return x * m + y;
-}
 char c[5000005];
+int id(int x, int y) { return x * m + y; }
 int fx[4] = {0, 0, 1, -1}, fy[4] = {1, -1, 0, 0}, w[1000];
 signed main()
 {
@@ -30,8 +27,7 @@ signed main()
     q.push({1, 1});
     while (!q.empty())
     {
-        int x = q.front().first;
-        int y = q.front().second;
+        auto [x, y] = q.front();
         q.pop();
         for (int i = 0; i < 4; i++)
         {
