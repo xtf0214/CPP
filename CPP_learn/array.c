@@ -1,11 +1,17 @@
 #include <stdio.h>
 void print(int *a, int m, int n)
 {
-    int(*b)[n] = (int(*)[n])a;
+    // int(*b)[n] = (int(*)[n])a;
+    // for (int i = 0; i < m; i++)
+    // {
+    //     for (int j = 0; j < n; j++)
+    //         printf("%d ", b[i][j]);
+    //     printf("\n");
+    // }
     for (int i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)
-            printf("%d ", b[i][j]);
+            printf("%d ", a[i * n + j]);
         printf("\n");
     }
 }
