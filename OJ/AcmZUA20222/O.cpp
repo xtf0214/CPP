@@ -8,7 +8,7 @@ int minElement(int a[], int l, int r)
     int m = (l + r) / 2;
     int ml = minElement(a, l, m);
     int mr = minElement(a, m, r);
-    return max(ml, mr);
+    return min(ml, mr);
 }
 void solve()
 {

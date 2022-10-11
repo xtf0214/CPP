@@ -3,10 +3,9 @@
  *
  * [1] 两数之和
  */
-
-// @lc code=start
 #include <vector>
 using namespace std;
+// @lc code=start
 class Solution
 {
 public:
