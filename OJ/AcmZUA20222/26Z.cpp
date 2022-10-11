@@ -25,6 +25,7 @@ void dfs(int k, int n, vi &a)
                 flag = false;
         if (flag)
             print(a);
+        return;
     }
     for (int i = 2; i <= n; i++)
         if (!vis[i])
