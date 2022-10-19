@@ -1,3 +1,4 @@
+// 	1025 Problem  E	韩信点兵（第一讲）
 #include <stdio.h>
 #define MAX 10000 + 5
 int main()

@@ -1,3 +1,4 @@
+// 1020 Problem  I	猜数字游戏的提示（第二讲）
 #include <bits/stdc++.h>
 using namespace std;
 using vi = vector<int>;

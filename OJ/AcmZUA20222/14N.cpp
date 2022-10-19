@@ -1,3 +1,4 @@
+// 	1030 Problem  N	求最小公倍数（第三讲）
 #include <bits/stdc++.h>
 using namespace std;
 

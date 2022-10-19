@@ -1,3 +1,4 @@
+// 	1024 Problem  D	子序列的和（第一讲）
 #include <stdio.h>
 int main()
 {

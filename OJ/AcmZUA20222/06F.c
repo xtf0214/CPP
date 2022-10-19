@@ -1,3 +1,4 @@
+// 1017 Problem  F	开灯问题（第二讲）
 #include <stdio.h>
 #define MAX 10000 + 5
 int main()

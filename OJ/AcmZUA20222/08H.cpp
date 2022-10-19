@@ -1,3 +1,4 @@
+// 	1019 Problem  H	周期串（第二讲）
 #include <bits/stdc++.h>
 using namespace std;
 using vi = vector<int>;

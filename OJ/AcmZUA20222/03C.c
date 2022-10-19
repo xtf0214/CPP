@@ -1,3 +1,4 @@
+// 	1023 Problem  C	3n+1问题（第一讲）
 #include <stdio.h>
 #define MAX 10000 + 5
 int main()

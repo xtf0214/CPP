@@ -1,3 +1,4 @@
+// 1022 Problem  B	aabb （第一讲）
 #include <stdio.h>
 #include <math.h>
 #define MAX 10000 + 5

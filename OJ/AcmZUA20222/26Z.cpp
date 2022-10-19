@@ -1,3 +1,4 @@
+// 1042 Problem  Z	素数环问题（第五讲）
 #include <bits/stdc++.h>
 using namespace std;
 using vi = vector<int>;

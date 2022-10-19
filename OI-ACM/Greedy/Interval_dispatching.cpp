@@ -18,7 +18,7 @@ int main()
         printf("%2d:",i);
         for (int j = 0; j < a[i].begin; j++)
             printf("  ");
-        for (int j = 0; j < a[i].value; j++)
+        for (int j = a[i].begin; j <= a[i].end; j++)
             printf("[]");
         printf("\n");
     }
@@ -31,7 +31,7 @@ int main()
         dp[i] = max(dp[a[i].prev] + a[i].value, dp[i - 1]);
 }
 /* 
-0 0 0
+8
 5 1 4
 1 3 5
 8 0 6
