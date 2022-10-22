@@ -1,0 +1,19 @@
+{
+    "name": "Luogu",
+    "problems": [
+        {
+            "cases": [
+                {
+                    "expected": "YES\nYES\nYES\nYES\nNO\nNO\nYES\nNO\nNO\nYES\n",
+                    "expected_output_filename": "D:/Code/CPP/OJ/Luogu/output/P1955_2.out",
+                    "input": "",
+                    "input_filename": "D:/Code/CPP/OJ/Luogu/input/P1955_2.in",
+                    "name": "test2"
+                }
+            ],
+            "description": "",
+            "name": "P1955",
+            "url": ""
+        }
+    ]
+}
