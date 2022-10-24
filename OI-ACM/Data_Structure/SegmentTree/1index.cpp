@@ -11,7 +11,7 @@ private:
     int rs(int p) { return p << 1 | 1; }
 
 public:
-    SegmentTree(const vector<int> &arr)
+    SegmentTree(const vector<T> &arr)
     {
         int len = arr.size();
         n = len & (len - 1) ? 1 << std::__lg(len) + 1 : len;
