@@ -11,11 +11,11 @@ int main()
     for (int i = 0; i < n; i++)
     {
         cin >> h;
-        while (!s.empty() && h >= s.top())
+        while (!s.empty() && s.top() <= h)
             s.pop();
         ans += s.size();
         s.push(h);
     }
     cout << ans;
     return 0;
-} 
+}
