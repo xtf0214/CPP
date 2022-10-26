@@ -18,7 +18,7 @@ int main()
     {
         scanf(" %[^\n]", book[i].name);
         scanf("%lf", &book[i].price);
-        getchar();
+        cin.get();
     }
     sort(book, book + n, cmp);
     for (int i = 0; i < n; i++)

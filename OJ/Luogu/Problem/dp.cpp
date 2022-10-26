@@ -20,22 +20,18 @@ int dfs(int v)
 {
     if (dp[v] != -1)
         return dp[v];
-    int res = INF;
     for (int u = 0; u < n; u++)
         if (G[u][v])
-            if (res > dfs(u) + G[u][v])
-            {
-                res = dfs(u) + G[u][v];
-                p[v] = u;
-            }
-    return dp[v] = res;
+            if (dp[v] > dfs(u) + G[u][v])
+                dp[v] = dfs(u) + G[u][v], p[v] = u;
+    return dp[v];
 }
 int main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     cin >> n >> m;
     G = vvi(n, vi(n));
-    dp = vi(n, -1);
+    dp = vi(n, INF);
     p = vi(n);
     for (int i = 0, u, v, w; i < m; i++)
     {
@@ -44,6 +40,7 @@ int main()
     }
     int bg, ed;
     cin >> bg >> ed;
+    
     dp[bg] = 0;
     p[bg] = -1;
 
