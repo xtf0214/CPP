@@ -1,3 +1,5 @@
+# https://github.com/luogu-dev/cyaron/wiki
+
 from cyaron import * # 引入CYaRon的库
 
 _n = ati([0, 7, 50, 1E4]) # ati函数将数组中的每一个元素转换为整形，方便您可以使用1E4一类的数来表示数据大小

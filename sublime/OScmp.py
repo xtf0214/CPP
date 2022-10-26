@@ -1,7 +1,7 @@
 import os
 
-std_exe = r"D:\Code\CPP\Match\memgxin\1\gg.exe"
-test_exe = r"D:\Code\CPP\Match\memgxin\1\g.exe"
+std_exe = r""
+test_exe = r""
 
 
 def compare(n):
