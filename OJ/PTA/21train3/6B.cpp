@@ -63,8 +63,8 @@ int main()
     matrix f{{2}, {1}, {1}}, fn; // M[f(2), f(1), f(0)] fn[f(n+2), f(n+1), f(n)]
     cin >> n;
     ctoi(n);
-    if (n.size() == 1 && n[0] < 4)
-        return cout << f[3 - n[0]][0], 0;
+    if (n.size() == 1 && n[0] < 3)
+        return cout << f[2 - n[0]][0], 0;
     n = reverseBin(n);
     res = pow(A, n);
     fn = res * f;
