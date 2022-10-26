@@ -4,12 +4,9 @@ typedef long long ll;
 ll pow(ll x, ll n)
 {
     ll s = 1;
-    for (; n; n >>= 1)
-    {
+    for (; n; n >>= 1, x = x * x)
         if (n & 1)
             s = s * x;
-        x = x * x;
-    }
     return s;
 }
 ll pow_mod(ll x, ll n, ll m)
