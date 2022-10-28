@@ -3,8 +3,8 @@
 from cyaron import *
 import os
 
-std_exe = r"D:\Code\CPP\OJ\PTA\21train3\6A.exe"
-test_exe = r"D:\Code\CPP\OJ\PTA\21train3\6B.exe"
+std_exe = r"D:\Code\CPP\OJ\PTA\21train3\1A.exe"
+test_exe = r"D:\Code\CPP\OJ\PTA\21train3\6A1.exe"
 
 
 def randRegion(a, b):
@@ -43,9 +43,13 @@ def cmpProgram(i):
 
 
 def setData(i, test_data: IO):
-    test_data.input_writeln(randRegion(1, 20))
+    k=randRegion(1, 8)
+    print("input: ",k)
+    test_data.input_writeln(randRegion(1, 8))
 
 
-for i in range(1, 10 + 1):
+
+for i in range(1, 100 + 1):
+    print(i)
     cmpProgram(i)
     # osCompare(i)

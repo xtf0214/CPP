@@ -9,6 +9,14 @@ ll pow(ll x, ll n)
             s = s * x;
     return s;
 }
+ll mul(ll x, ll n)
+{
+    ll s = 0;
+    for (; n; n >>= 1, x = x + x)
+        if (n & 1)
+            s = s + x;
+    return s;
+}
 ll pow_mod(ll x, ll n, ll m)
 {
     ll s = 1;
@@ -23,5 +31,6 @@ ll pow_mod(ll x, ll n, ll m)
 }
 int main()
 {
+    cout << mul(2, 5);
     return 0;
 }
