@@ -1,40 +1,24 @@
 #include <bits/stdc++.h>
-#define lowbit(x) x & -x
 using namespace std;
-template <typename T>
-T op(T a, T b) { return a + b; }
-template <typename T>
-T rop(T x) { return -x; }
-template <typename T, T (*op)(T, T), T (*rop)(T), T e>
-class BIT
-{
-private:
-    int n;
-    vector<T> dat;
 
-public:
-    BIT(int len = 0) { n = len, dat.assign(n + 1, e); }
-    void add(int x, int d)
+#define lowbit(x) x &(-x)
+template <typename T>
+struct BIT
+{
+    int size;
+    vector<T> dat;
+    BIT(int n = 0) : size(n), dat(vector<T>(n + 1, 0)) {}
+    void add(int i, T x)
     {
-        for (; x <= n; x += lowbit(x))
-            dat[x] += d;
+        for (; i <= size; i += lowbit(i))
+            dat[i] += x;
     }
-    T getSum(int x)
+    T getSum(int i)
     {
-        T res = 0;
-        for (; x; x -= lowbit(x))
-            res += dat[x]; // dat[i] 保存了lowbit(i)个数
-        return res;
+        T sum = 0;
+        for (; i; i -= lowbit(i))
+            sum += dat[i];
+        return sum;
     }
     T query(int l, int r) { return getSum(r) - getSum(l - 1); }
 };
-
-int main()
-{
-    int n = 16;
-    BIT<int, op, rop, 0> bt(n);
-    for (int i = 1; i <= 16; i++)
-        bt.add(i, 1);
-    cout << bt.query(9, 16);
-    return 0;
-}
