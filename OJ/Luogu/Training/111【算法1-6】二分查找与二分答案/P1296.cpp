@@ -1,3 +1,5 @@
+// P1296 奶牛的耳语
+// https://www.luogu.com.cn/problem/P1296
 #include <iostream>
 #include <algorithm>
 using namespace std;

@@ -1,3 +1,5 @@
+// P1102 A-B 数对
+// https://www.luogu.com.cn/problem/P1102
 #include <iostream>
 #include <algorithm>
 using namespace std;

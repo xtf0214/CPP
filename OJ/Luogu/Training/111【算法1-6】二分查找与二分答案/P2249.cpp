@@ -1,3 +1,5 @@
+// P2249 【深基13.例1】查找
+// https://www.luogu.com.cn/problem/P2249
 #include <iostream>
 using namespace std;
 int a[1000005];
