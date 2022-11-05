@@ -3,7 +3,7 @@
 from cyaron import *
 import os
 
-std_exe = r"D:\Code\CPP\OJ\Luogu\Problem\P3509A.exe"
+std_exe = r"D:\Code\CPP\OJ\Luogu\Problem\P3865A.exe"
 test_exe = r"D:\Code\CPP\OJ\Luogu\Problem\P3509.exe"
 
 
@@ -53,16 +53,20 @@ def cmpProgram(i):
 
 
 def setData(i, test_data: IO):
-    n = randRegion(1, 6)
-    k = randint(1, n - 1)
-    m = randRegion(1, 8)
-    test_data.input_writeln(n, k, m)
+    n = randint(1, 1e5)
+    m = randint(1, 2e6)
+    test_data.input_writeln(n, m)
     for i in range(n):
-        test_data.input_write(randint(1, 1e18))
+        test_data.input_write(randint(1e8, 1e9))
+    for i in range(m):
+        l = randint(1, n)
+        r = randint(l, n)
+        test_data.input_writeln(l, r)
     test_data.input_writeln()
 
 
 for i in range(1, 10 + 1):
     print(i)
-    cmpProgram(i)
+    makeData(i)
+    # cmpProgram(i)
     # osCompare(i)
