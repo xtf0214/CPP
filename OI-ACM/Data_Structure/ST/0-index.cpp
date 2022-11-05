@@ -18,9 +18,10 @@ struct SparseTable
     T query(int l, int r)
     {
         int s = __lg(r - l + 1);
-        return op(dat[l][s], dat[r - (1 << s) + 1][s]);
+        return op(dat[l - 1][s], dat[r - (1 << s)][s]);
     }
 };
+int maxn(int a, int b) { return a > b ? a : b; }
 int main()
 {
     int n, m;
@@ -28,8 +29,6 @@ int main()
     cin >> n >> m;
     for (int i = 0, x; i < n; i++)
         cin >> x, a.push_back(x);
-    auto maxn = [](int a, int b)
-    { return a > b ? a : b; };
     SparseTable<int, maxn> st(a);
     while (m--)
     {

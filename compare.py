@@ -3,8 +3,8 @@
 from cyaron import *
 import os
 
-std_exe = r"D:\Code\CPP\OJ\Luogu\Problem\P1228A.cpp"
-test_exe = r"D:\Code\CPP\OJ\Luogu\Problem\P1228.cpp"
+std_exe = r"D:\Code\CPP\OJ\Luogu\Problem\P3509A.exe"
+test_exe = r"D:\Code\CPP\OJ\Luogu\Problem\P3509.exe"
 
 
 def randRegion(a, b):
@@ -42,14 +42,24 @@ def cmpProgram(i):
         print("Wrong Answer:", input_file)
 
 
+# def setData(i, test_data: IO):
+#     # k=randRegion(1, 8)
+#     # print("input: ",k)
+#     # test_data.input_writeln(randRegion(1, 8))
+#     k = randint(1, 10)
+#     x = randint(1, 1 << k)
+#     y = randint(1, 1 << k)
+#     test_data.input_writeln(k, x, y)
+
+
 def setData(i, test_data: IO):
-    # k=randRegion(1, 8)
-    # print("input: ",k)
-    # test_data.input_writeln(randRegion(1, 8))
-    k = randint(1, 10)
-    x = randint(1, 1 << k)
-    y = randint(1, 1 << k)
-    test_data.input_writeln(k, x, y)
+    n = randRegion(1, 6)
+    k = randint(1, n - 1)
+    m = randRegion(1, 8)
+    test_data.input_writeln(n, k, m)
+    for i in range(n):
+        test_data.input_write(randint(1, 1e18))
+    test_data.input_writeln()
 
 
 for i in range(1, 10 + 1):
