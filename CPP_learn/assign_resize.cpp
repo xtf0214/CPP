@@ -13,24 +13,24 @@ const int vec[4][2]{{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
 int main()
 {
     vi a, b;
-    a.assign(7, 100);
-    b.resize(7, 100);
+    a.assign(7, 7);
+    b.resize(7, 7);
     cout << "a.size = " << a.size() << endl;
     print(a);
     cout << "b.size = " << b.size() << endl;
     print(b);
     cout << endl;
 
-    a.assign(4, 5);
-    b.resize(4, 5);
+    a.assign(5, 5);
+    b.resize(5, 5);
     cout << "a.size = " << a.size() << endl;
     print(a);
     cout << "b.size = " << b.size() << endl;
     print(b);
     cout << endl;
 
-    a.assign(10, 5);
-    b.resize(10, 5);
+    a.assign(10, 10);
+    b.resize(10, 10);
     cout << "a.size = " << a.size() << endl;
     print(a);
     cout << "b.size = " << b.size() << endl;

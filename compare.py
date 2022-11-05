@@ -3,14 +3,20 @@
 from cyaron import *
 import os
 
-std_exe = r"D:\Code\CPP\OJ\Luogu\Problem\P3865A.exe"
-test_exe = r"D:\Code\CPP\OJ\Luogu\Problem\P3509.exe"
+std_exe = r"D:\Code\CPP\OJ\Luogu\Problem\P4155A.exe"
+test_exe = r"D:\Code\CPP\OJ\Luogu\Problem\P4155.exe"
 
 
 def randRegion(a, b):
     i = randint(a, b)  # 数字位数
     l, r = 10**(i - 1), 10**i
     return randrange(l, r)
+
+
+def randPair(a, b):
+    l = randint(a, b)
+    r = randint(l, b)
+    return l, r
 
 
 def makeData(i):
@@ -51,17 +57,23 @@ def cmpProgram(i):
 #     y = randint(1, 1 << k)
 #     test_data.input_writeln(k, x, y)
 
+# def setData(i, test_data: IO):
+#     n = randint(1, 1e5)
+#     m = randint(1, 2e6)
+#     test_data.input_writeln(n, m)
+#     for i in range(n):
+#         test_data.input_write(randint(1e8, 1e9))
+#     for i in range(m):
+#         test_data.input_writeln(randPair(1, n))
+#     test_data.input_writeln()
+
 
 def setData(i, test_data: IO):
-    n = randint(1, 1e5)
-    m = randint(1, 2e6)
+    n = randint(1, 2e5)
+    m = randint(1, 1e9)
     test_data.input_writeln(n, m)
     for i in range(n):
-        test_data.input_write(randint(1e8, 1e9))
-    for i in range(m):
-        l = randint(1, n)
-        r = randint(l, n)
-        test_data.input_writeln(l, r)
+        test_data.input_writeln(randPair(1, m))
     test_data.input_writeln()
 
 
