@@ -1,12 +1,22 @@
-// P3865 【模板】ST 表
-// https://www.luogu.com.cn/problem/P3865
+// P1816 忠诚
+// https://www.luogu.com.cn/problem/P1816
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
 using pii = pair<int, int>;
 using vi = vector<int>;
 using vll = vector<ll>;
+#define fi first
+#define se second
+#define all(v) v.begin(), v.end()
+#define lowbit(x) x &(-x)
+#define print(v) for (int i = 0; i < v.size(); cout << v[i] << " \n"[i++ == v.size() - 1])
+// #define print(v, split) for (int i = 0; i < v.size(); cout << v[i] << (char[2][2]){split, "\n"}[i++ == v.size() - 1])
+const int N = 1e6 + 5, INF = 0x3f3f3f3f, mod = 1e9 + 7;
+const int vec[4][2]{{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
 
+int n, m;
+vi a;
 template <typename T, T (*op)(T, T)>
 struct SparseTable
 {
@@ -27,22 +37,20 @@ struct SparseTable
         return op(dat[l][s], dat[r - (1 << s) + 1][s]);
     }
 };
-int maxn(int a, int b) { return a > b ? a : b; }
-
-int main()
+int minn(int a, int b) { return a < b ? a : b; }
+signed main()
 {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
-    int n, m;
     cin >> n >> m;
-    vi a(n);
+    a = vi(n);
     for (int i = 0; i < n; i++)
         cin >> a[i];
-    SparseTable<int, maxn> st_max(a);
+    SparseTable<int, minn> st_min(a);
     while (m--)
     {
         int l, r;
         cin >> l >> r;
-        cout << st_max.query(l, r) << "\n";
+        cout << st_min.query(l, r) << " ";
     }
     return 0;
 }
