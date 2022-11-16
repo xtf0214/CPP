@@ -41,7 +41,6 @@ void dfs(int d, int chs, int s)
 }
 signed main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     cin >> n >> m;
     a = vi(n);
     for (int i = 0; i < n; i++)

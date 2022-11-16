@@ -22,8 +22,8 @@ signed main()
         cin >> a >> b;
         a--, b--;
         vector<int> cap, cup;
-        set_intersection(all(s[a]), all(s[b]), back_insert_iterator<vector<int>>(cap));
-        set_union(all(s[a]), all(s[b]), back_insert_iterator<vector<int>>(cup));
+        set_intersection(all(s[a]), all(s[b]), back_insert_iterator(cap));
+        set_union(all(s[a]), all(s[b]), back_insert_iterator(cup));
         printf("%.2lf%\n", 100.0 * int(cap.size()) / int(cup.size()));
     }
     return 0;

@@ -37,7 +37,6 @@ void dfs(int deep, int st, double sum)
 
 signed main()
 {
-    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     cin >> n;
     ps = vT<pdd>(n + 1);
     vis = vT<bool>(n + 1);
