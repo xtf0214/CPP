@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const int vec[4][2]{{0, 1}, {-1, 0}, {0, -1}, {1, 0}}; // →↑←↓
+const int vec[4][2]{{-1, 0}, {0, 1}, {1, 0}, {0, -1}}; // ↑→↓←
 int bg, ed = 123804765;
 int a[9];
 int (*b)[3] = (int (*)[3])a;
@@ -29,20 +29,20 @@ int change(int u, int op)
         v = v * 10 + a[i];
     return v;
 }
-void check(int v, pair<int, bool> h)
+// v=当前状态，u=bkt队列的首个状态
+void check(int v, int u, int bkt)
 {
-    if (auto &[u, fa] = h; v != -1)
+    if (v == -1)
+        return;
+    if (rec[bkt ^ 1].count(v))
+    { // 如果在另一个桶里搜索过v状态，答案为合并两桶的状态再+1，1=u→v
+        cout << rec[bkt ^ 1][v] + rec[bkt][u] + 1;
+        exit(0);
+    }
+    else
     {
-        if (rec[fa ^ 1].count(v))
-        {
-            cout << rec[0][v] + rec[1][u] + 1;
-            exit(0);
-        }
-        else
-        {
-            rec[fa][v] = rec[fa][u] + 1;
-            Q.push({v, fa});
-        }
+        rec[bkt][v] = rec[bkt][u] + 1;
+        Q.push({v, bkt});
     }
 }
 signed main()
@@ -57,13 +57,12 @@ signed main()
     Q.push({ed, 1});
     while (!Q.empty())
     {
-        auto h = Q.front();
+        auto &[u, bkt] = Q.front();
         Q.pop();
-        int v;
         for (int i = 0; i < 4; i++)
         {
-            v = change(h.first, i);
-            check(v, h);
+            int v = change(u, i);
+            check(v, u, bkt);
         }
     }
     return 0;
