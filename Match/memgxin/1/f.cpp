@@ -1,45 +1,35 @@
 #include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
 using pii = pair<int, int>;
-using pll = pair<ll, ll>;
-using vi = vector<int>;
-using vll = vector<ll>;
-using vvi = vector<vi>;
-using vvll = vector<vll>;
-#define fi first
-#define se second
+#define F first
+#define S second
 #define all(v) v.begin(), v.end()
-#define print(v) for (int i = 0; i < v.size(); cout << v[i] << " \n"[i == v.size() - 1], ++i)
-const int N = 1e6 + 5, INF = 0x3f3f3f3f, mod = 1e9 + 7;
 
-int main()
-{
+int main() {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     int n, m, t;
     cin >> n >> m >> t;
-    priority_queue<int> pq;
+    priority_queue<int> Qmax;
     vector<pii> a(m);
     for (int i = 0; i < m; i++)
-        cin >> a[i].fi >> a[i].se;
+        cin >> a[i].F >> a[i].S;
     sort(all(a));
-    int ans = 0, st = 0;
-    while (st == m || t < a.back().fi)
-    {
-        pii max;
-        for (int i = st; /* i < m && a[i].fi <= t ? true : st = i, false */; i++)
-        {
-            if (i >= m || a[i].fi > t)
-            {
-                st = i;
-                break;
+    a.push_back({n, 0});
+    int ans = 0;
+    for (int i = 0; i < m; i++) {
+        if (t < a[i].F) {
+            if (!Qmax.empty() && Qmax.top() >= a[i].F)
+                t = Qmax.top(), ans++;
+            else {
+                cout << -1 << endl;
+                return 0;
             }
-            if (max.se < a[i].se)
-                max = a[i];
         }
-        t = max.fi + max.se;
-        ans++;
+        Qmax.push(a[i].F + a[i].S);
     }
-    cout << ans << endl;
+    if (t >= n)
+        cout << ans << endl;
+    else
+        cout << "-1" << endl;
     return 0;
 }
