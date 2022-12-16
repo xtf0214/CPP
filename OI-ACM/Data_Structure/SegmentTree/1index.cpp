@@ -1,36 +1,25 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-template <typename T, T (*op)(T, T), T e>
-class SegmentTree
-{
-private:
+template <typename T, T (*op)(T, T), T e> struct SegmentTree {
     int n;
     vector<T> dat;
     int ls(int p) { return p << 1; }
     int rs(int p) { return p << 1 | 1; }
-
-public:
-    SegmentTree(const vector<T> &arr)
-    {
-        int len = arr.size();
-        n = len & (len - 1) ? 1 << std::__lg(len) + 1 : len;
-        dat = vector<T>(2 * n, e);
-        copy(arr.begin(), arr.end(), dat.begin() + n);
+    SegmentTree(const vector<T> &v) : n(v.size()) {
+        n = n & (n - 1) ? 1 << __lg(n) + 1 : n;    // 补成满二叉树
+        dat.assign(2 * n, e);                      // 总共需要2n-1个节点
+        copy(v.begin(), v.end(), dat.begin() + n); // [1,n-1]为枝,[n,2*n-1]为叶
         for (int p = n - 1; p >= 1; p--)
             dat[p] = op(dat[ls(p)], dat[rs(p)]);
     }
-    // 单点修改
-    void update(int i, T k)
-    {
+    void update(int i, T k) { // 单点修改
         dat[i += n - 1] = k;
         for (int p = i >> 1; p; p >>= 1)
             dat[p] = op(dat[ls(p)], dat[(rs(p))]);
     }
-    // 区间查询[a,b]
-    T query(int a, int b) { return query(a, b, 1, 1, n); }
-    T query(int a, int b, int p, int l, int r)
-    {
+    T query(int a, int b) { return query(a, b, 1, 1, n); } // 区间查询[a,b]
+    T query(int a, int b, int p, int l, int r) {
         if (a > r || b < l)
             return e;
         if (a <= l && b >= r)
@@ -41,14 +30,14 @@ public:
         return op(vl, vr);
     }
 };
-template <typename T>
-T op(T a, T b) { return a + b; }
-int main()
-{
+int _plus(int a, int b) { return a + b; }
+int main() {
     int n;
     cin >> n;
     vector<int> arr(n, 1);
-    SegmentTree<int, op, 0> ST(arr);
-    cout << ST.query(1, n) << endl;
+    SegmentTree<int, _plus, 0> seg(arr);
+    for (int i = 1; i <= n; i++)
+        seg.update(i, i);
+    cout << seg.query(1, n) << endl;
     return 0;
 }
