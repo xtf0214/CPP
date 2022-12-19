@@ -23,14 +23,16 @@ int rec1() {
 int rec2() {
     vector<int> dp(W + 1);
     for (int i = 1; i <= n; i++)
-        for (int j = W; j >= w[i]; j--)
+        for (int j = w[i]; j <= W; j++)
             dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
     return dp[W];
 }
 int main() {
     cin >> W >> n;
+    w.resize(n + 1);
+    v.resize(n + 1);
     for (int i = 1; i <= n; i++)
         cin >> w[i] >> v[i];
-    cout << rec2() << endl;
+    cout << rec() << endl;
     return 0;
 }
