@@ -15,12 +15,21 @@ int rec() {
 int rec1() {
     vector<int> dp(W + 1);
     for (int i = 1; i <= n; i++)
+        for (int j = W; j >= w[i]; j--)
+            for (int k = 1; j - k * w[i] >= 0 && k <= c[i]; k++)
+                dp[j] = max(dp[j], dp[j - k * w[i]] + k * v[i]);
+    return dp[W];
+}
+int rec2() {
+    vector<int> dp(W + 1);
+    for (int i = 1; i <= n; i++)
         for (int k = 1; k <= c[i]; k++)
             for (int j = W; j >= w[i]; j--)
                 dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
     return dp[W];
 }
-int rec2() {
+
+int rec3() {
     vector<int> dp(W + 1);
     vector<pii> a;
     for (int i = 1; i <= n; i++) {
@@ -41,7 +50,7 @@ int main() {
     c.resize(n + 1);
     for (int i = 1; i <= n; i++)
         cin >> w[i] >> v[i] >> c[i];
-    cout << rec2();
+    cout << rec3();
     return 0;
 }
 /*
