@@ -8,30 +8,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-#define print(v) for (int i = 0; i < v.size(); cout << v[i] << " \n"[++i == v.size()])
-const int N = 1e6 + 5, INF = 0x3f3f3f3f, mod = 1e9 + 7;
-
 int n, cnt;
 vector<int> pos;
 vector<int> vis;
+vector<int> del{-3, -2, 2, 3};
 void dfs(int k) {
     if (k == n + 1) {
         cnt++;
         for (int i = 1; i <= n; i++)
             cout << pos[i] << " ";
-        cout << endl;
+        // cout << n;
         exit(0);
     }
-    int a[]{k - 3, k - 2, k + 2, k + 3};
-    for (int i : a)
-        if (1 <= i && i <= n && !vis[i]) {
-            vis[i] = true;
-            pos[i] = k;
+    for (int i = 0; i < 4; i++)
+        if (int x = k + del[i]; 1 <= x && x <= n && !vis[x]) {
+    // for (int x : {k - 3, k - 2, k + 2, k + 3})
+    //     if (1 <= x && x <= n && !vis[x]) {
+            vis[x] = true;
+            pos[x] = k;
             dfs(k + 1);
-            vis[i] = false;
+            vis[x] = false;
         }
 }
-
 int main() {
     ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     cin >> n;
