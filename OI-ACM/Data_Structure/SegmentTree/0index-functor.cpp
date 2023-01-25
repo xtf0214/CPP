@@ -2,7 +2,7 @@
  * @file    :   0index-copy vector
  * @author  :   Tanphoon
  * @date    :   2023/01/08 00:36
- * @version :   2023/01/08 13:38
+ * @version :   2023/01/25 21:37
  * @link    :   None
  */
 #include <iostream>
@@ -15,7 +15,7 @@ template <typename T, typename Operator = plus<T>, T e = 0> struct SegmentTree {
     int ls(int p) { return p * 2 + 1; }
     int rs(int p) { return p * 2 + 2; }
     SegmentTree(const vector<T> &v) : n(v.size()) {
-        n = n & (n - 1) ? 1 << __lg(n) + 1 : n;        // 补成满二叉树
+        n = 1 << (32 - __builtin_clz(n - 1));          // 补成满二叉树
         dat.assign(2 * n, e);                          // 总共需要2n-1个节点
         copy(v.begin(), v.end(), dat.begin() + n - 1); // [0,n-2]为枝,[n-1,2*n-2]为叶
         for (int p = n - 2; p >= 0; p--)

@@ -7,7 +7,7 @@ template <typename T, T (*op)(T, T), T e> struct SegmentTree {
     int ls(int p) { return p << 1; }
     int rs(int p) { return p << 1 | 1; }
     SegmentTree(const vector<T> &v) : n(v.size()) {
-        n = n & (n - 1) ? 1 << __lg(n) + 1 : n;    // 补成满二叉树
+        n = 1 << (32 - __builtin_clz(n - 1));      // 补成满二叉树
         dat.assign(2 * n, e);                      // 总共需要2n-1个节点
         copy(v.begin(), v.end(), dat.begin() + n); // [1,n-1]为枝,[n,2*n-1]为叶
         for (int p = n - 1; p >= 1; p--)
