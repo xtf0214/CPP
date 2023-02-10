@@ -7,27 +7,33 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define at(i) i + MR
+template <typename T, int l, int r> class NegaIdArray {
+    vector<T> dat;
+
+  public:
+    NegaIdArray(T a = 0) : dat(vector<T>(r - l + 1, a)) {}
+    T &operator[](int i) { return dat[i - l]; }
+};
 const int MR = 400 * 1000;
 const int INF = 0x3f3f3f3f;
 
 int n;
 vector<int> IQ, EQ;
 int solve() {
-    vector f(2, vector<int>(2 * MR + 5, -INF));
-    f[0][at(0)] = f[1][at(0)] = 0;
+    vector f(2, NegaIdArray<int, -MR, MR>(-INF));
+    f[0][0] = f[1][0] = 0;
     int cr = 1;
     for (int i = 1; i <= n; i++, cr ^= 1)
         for (int j = -MR; j <= MR; j++) {
             if (-MR <= j - IQ[i] && j - IQ[i] <= MR)
-                f[cr][at(j)] = max(f[cr ^ 1][at(j)], f[cr ^ 1][at(j) - IQ[i]] + EQ[i]);
+                f[cr][j] = max(f[cr ^ 1][j], f[cr ^ 1][j - IQ[i]] + EQ[i]);
             else
-                f[cr][at(j)] = f[cr ^ 1][at(j)];
+                f[cr][j] = f[cr ^ 1][j];
         }
     int ans = -INF;
     for (int i = 0; i <= MR; i++)
-        if (f[cr ^ 1][at(i)] >= 0)
-            ans = max(ans, f[cr ^ 1][at(i)] + i);
+        if (f[cr ^ 1][i] >= 0)
+            ans = max(ans, f[cr ^ 1][i] + i);
     return ans;
 }
 int main() {
