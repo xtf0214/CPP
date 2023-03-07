@@ -1,22 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
-int main()
-{
-    int m, n, q, a, b;
-    int y = 0, x = 0;
-    bool used[2][100005];
+int m, n, q, a, b;
+int y = 0, x = 0;
+bool used[2][100010];
+int main() {
     cin >> n >> m >> q;
-    while (q--)
-    {
+    while (q--) {
         cin >> a >> b;
-        if ((a == 0 && (b < 1 || b > m)) || (a == 1 && (b < 1 || b > n)))
-            continue;
-        if (!used[a][b])
-        {
-            a ? y++ : x++;
+        if (!used[a][b]) {
             used[a][b] = true;
+            a ? x++ : y++;
         }
     }
-    cout << m * n - y * m - x * n + x * y;
+    cout << (m - x) * (n - y);
     return 0;
 }
