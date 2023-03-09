@@ -14,9 +14,10 @@ vector<vector<int>> f;
 
 void dfs(int u) {
     f[u][1] = val[u];
+    f[u][0] = 0;
     for (int v : G[u]) {
         dfs(v);
-        for (int j = m + 1; j >= 0; j--) // 倒序自动滚动
+        for (int j = m + 1; j >= 2; j--) // 倒序自动滚动
             for (int k = 0; k < j; k++)  // 正序倒序无妨
                 f[u][j] = max(f[u][j], f[u][j - k] + f[v][k]);
     }
@@ -33,9 +34,9 @@ int main() {
         val[v] = w;
     }
     dfs(0);
-    for (int i = 0; i <= n; i++)
-        for (int j = 0; j <= m + 1; j++)
-            cerr << f[i][j] << " \n"[j == m + 1];
+    // for (int i = 0; i <= n; i++)
+    //     for (int j = 0; j <= m + 1; j++)
+    //         cerr << f[i][j] << " \n"[j == m + 1];
     cout << f[0][m + 1];
     return 0;
 }
