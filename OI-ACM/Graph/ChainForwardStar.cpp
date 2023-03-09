@@ -9,14 +9,21 @@ using namespace std;
 using ll = long long;
 
 struct ChainForwardStar {
+    using Edge = pair<int, int>;
     vector<int> head, next;
-    vector<pair<int, int>> edges;
+    vector<Edge> edges;
     int E;
     ChainForwardStar(int V = 0) { head.resize(V + 1, -1); }
     void addEdge(int u, int v, int w = 1) {
         edges.push_back({v, w});
         next.push_back(head[u]);
         head[u] = E++;
+    }
+    vector<Edge> operator[](int u) {
+        vector<Edge> res;
+        for (int i = head[u]; ~i; i = next[i])
+            res.push_back(edges[i]);
+        return res;
     }
 };
 int main() {
@@ -28,11 +35,9 @@ int main() {
         cin >> u >> v >> w;
         G.addEdge(u, v, w);
     }
-    for (int u = 1; u <= V; u++) {
-        for (int i = G.head[u]; ~i; i = G.next[i]) {
-            auto &[v, w] = G.edges[i];
+    for (int u = 0; u < V; u++) {
+        for (auto &[v, w] : G[u])
             cout << u << " " << v << " " << w << endl;
-        }
         cout << endl;
     }
 }
