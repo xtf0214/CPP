@@ -3,7 +3,7 @@ using namespace std;
 
 struct DisjointSet {
     vector<int> rank, p;
-    DisjointSet(int n = 1e9) : p(vector<int>(n)), rank(vector<int>(n)) { iota(p.begin(), p.end(), 0); }
+    DisjointSet(int n = 1e6) : p(n), rank(n) { iota(p.begin(), p.end(), 0); }
     int find(int x) { return p[x] == x ? x : p[x] = find(p[x]); }
     void unite(int x, int y) {
         x = find(x), y = find(y);

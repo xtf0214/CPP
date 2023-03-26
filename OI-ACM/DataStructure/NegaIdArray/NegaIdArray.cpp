@@ -3,7 +3,7 @@ using namespace std;
 
 template <typename T, int l, int r> struct NegaIdArray {
     vector<T> dat;
-    NegaIdArray(T a = 0) : dat(vector<T>(r - l + 1, a)) {}
+    NegaIdArray(T a = 0) : dat(r - l + 1, a) {}
     T &operator[](int i) { return dat[i - l]; }
 };
 

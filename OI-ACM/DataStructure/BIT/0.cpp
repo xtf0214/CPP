@@ -5,7 +5,7 @@ template <typename T> struct BIT {
 #define lowbit(x) x & (-x)
     int size;
     vector<T> dat;
-    BIT(int n = 0) : size(n), dat(vector<T>(n + 1, 0)) {}
+    BIT(int n = 0) : size(n), dat(n + 1, 0) {}
     void add(int i, T x) {
         for (; i <= size; i += lowbit(i))
             dat[i] += x;
