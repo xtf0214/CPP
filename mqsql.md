@@ -4,7 +4,7 @@ student(student_id, name, gender, academy, number_area) item(item_id, name, type
 
 competition(comp_id, item_id, student_id, rank, score, is_record_breaking) // rank表示名次，score表示得分，is_record_breaking表示是否打破记录
 
-#### 2.阅读后续题目，为每个关系模式设计需要的测试数据，数据量不少于5条。注意，必须有自己学号、姓名和参赛项目。 要求做完第5题，录入数据后 截图 上传
+### 2.阅读后续题目，为每个关系模式设计需要的测试数据，数据量不少于5条。注意，必须有自己学号、姓名和参赛项目。 要求做完第5题，录入数据后 截图 上传
 
 student:
 
