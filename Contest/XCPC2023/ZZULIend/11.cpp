@@ -1,50 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-string x1, ys, x2, y2;
-int ok1 = 1, ok2 = 1;
-long long ss1, ss2;
-
-long long check(long long x, long long y) {
-	return x * x + y * y;
+using ll = long long;
+bool check(string sx, string sy, ll &dist) {
+    if (sx.size() > 6 || sy.size() > 6)
+        return false;
+    ll x = stoi(sx), y = stoi(sy);
+    dist = x * x + y * y;
+    return dist <= 1000000;
 }
-
 int main() {
-	cin >> x1 >> ys >> x2 >> y2;
-	if (x1.size() <= 5 && ys.size() <= 5) {
-		int xx1 = stoi(x1);
-		int yy1 = stoi(ys);
-		ss1 = check(1LL * xx1, 1LL * yy1);
-		if (ss1 <= 1000 * 1000)
-			;
-		else
-			ok1 = 0;
-	} else {
-		ok1 = 0;
-	}
-	if (x2.size() <= 5 && y2.size() <= 5) {
-		int xx2 = stoi(x2);
-		int yy2 = stoi(y2);
-		ss2 = check(1LL * xx2, 1LL * yy2);
-		if (ss2 <= 1000 * 1000)
-			;
-		else
-			ok2 = 0;
-	} else {
-		ok2 = 0;
-	}
-	if (ok1 && ok2) {
-		if (ss1 < ss2)
-			printf("Alice\n");
-		else if (ss1 == ss2)
-			printf("Draw\n");
-		else
-			printf("Bob\n");
-	} else if (ok1 && !ok2)
-		printf("Alice\n");
-	else if (!ok1 && ok2)
-		printf("Bob\n");
-	else
-		printf("Draw\n");
-	return 0;
+    string x1, y1, x2, y2;
+    cin >> x1 >> y1 >> x2 >> y2;
+    ll d1 = 0, d2 = 0;
+    bool ok1 = check(x1, y1, d1);
+    bool ok2 = check(x2, y2, d2);
+    if (!ok1 && !ok2)
+        cout << "Draw";
+    else if (!ok1)
+        cout << "Bob";
+    else if (!ok2)
+        cout << "Alice";
+    else {
+        if (d1 == d2)
+            cout << "Draw";
+        else if (d1 < d2)
+            cout << "Alice";
+        else
+            cout << "Bob";
+    }
+    return 0;
 }
