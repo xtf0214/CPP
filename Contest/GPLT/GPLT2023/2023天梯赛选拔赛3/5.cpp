@@ -20,6 +20,6 @@ int main() {
         cin >> m >> n;
         ans = 0;
         dfs(m, 0);
-        printf("%.2lf", ans / pow(6, m));
+        printf("%.2lf\n", ans / pow(6, m));
     }
 }
