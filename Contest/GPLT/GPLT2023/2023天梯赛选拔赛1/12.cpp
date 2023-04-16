@@ -24,9 +24,9 @@ int main() {
     cin >> n;
     while (n--) {
         int id, fa, ma;
-        scanf("%d ", &id);
-        sex[id] = getchar();
-        scanf(" %d %d", &fa, &ma);
+        cin >> id;
+        cin >> sex[id];
+        cin >> fa >> ma;
         if (fa != -1) {
             G[id].push_back(fa);
             sex[fa] = 'M';
@@ -54,7 +54,7 @@ int main() {
     }
     return 0;
 }
-/* 
+/*
 11
 1 M 2 -1
 2 M 3 -1
