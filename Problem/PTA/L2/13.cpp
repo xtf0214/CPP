@@ -31,9 +31,9 @@ int main()
     {
         int t, fa, ma;
         char ch;
-        scanf("%d ", &t);
-        sex[t] = getchar();
-        scanf(" %d %d", &fa, &ma);
+        cin >> t;
+        cin >> sex[t];
+        cin >> fa >> ma;
         if (fa != -1) //-1不用保存，避免数据处理不当导致数组越界
         {
             vec[t].push_back(fa); //保存双亲
