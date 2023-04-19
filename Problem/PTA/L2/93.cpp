@@ -11,31 +11,57 @@ const int N = 1e3 + 5;
 
 int n, m;
 double G[N][N];
+vector<int> peo[N];
+vector<int> photo[N];
+
 bool sex[N];
 string id[N];
 
+int getId(string &s) {
+    int x = abs(stoi(s));
+    sex[x] = s[0] == '-';
+    id[x] = s;
+    return x;
+}
 int main() {
     cin >> n >> m;
     for (int i = 1, k; i <= m; i++) {
         cin >> k;
-        vector<int> a;
-        while (k--) {
+        for (int j = 0; j < k; j++) {
             string num;
             cin >> num;
-            int x = abs(stoi(num));
-            a.push_back(x);
-            sex[x] = (num[0] == '-');
-            id[x] = num;
+            int x = getId(num);
+            peo[x].push_back(i);
+            photo[i].push_back(x);
         }
-        for (int i = 0; i < k; i++)
-            for (int j = i + 1; j < k; j++)
-                if (int u = a[i], v = a[j]; sex[u] != sex[v])
-                    G[v][u] = G[u][v] += 1.0 / k;
     }
     string A, B;
     cin >> A >> B;
-    int a = abs(stoi(A)), b = abs(stoi(B));
-    id[a] = A, id[b] = B;
+    int a = getId(A), b = getId(B);
+
+    for (int u : {a, b})
+        for (int i : peo[u])
+            for (int v : photo[i])
+                if (sex[u] != sex[v])
+                    G[u][v] += 1.0 / photo[i].size();
+
     double mxa = 0, mxb = 0;
     for (int i = 0; i < n; i++)
+        if (sex[i] != sex[a])
+            mxa = max(mxa, G[a][i]);
+    for (int i = 0; i < n; i++)
+        if (sex[i] != sex[b])
+            mxb = max(mxb, G[b][i]);
+    if (G[a][b] == mxa && G[b][a] == mxb) {
+        cout << id[a] << " " << id[b] << endl;
+        return 0;
+    } else {
+        for (int i = 0; i < n; ++i)
+            if (G[a][i] == mxa && sex[a] != sex[i])
+                cout << id[a] << " " << id[i] << endl;
+        for (int i = 0; i < n; ++i)
+            if (G[b][i] == mxb && sex[b] != sex[i])
+                cout << id[b] << " " << id[i] << endl;
+    }
+    return 0;
 }
