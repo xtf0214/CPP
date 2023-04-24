@@ -20,9 +20,11 @@ int main() {
         int num, height, weight;
         string name;
         cin >> num >> name >> height >> weight;
+        // 如果这个宿舍还没往里面加人，或者宿舍里这个人的身高不如当前这个人高，更新这个宿舍的最高人
         if (!mp.count(num) || mp[num].height < height)
             mp[num] = Node{name, height, weight};
     }
+    // map按照键值的大小排序，也就是按照宿舍号升序排
     for (auto &[k, e] : mp) {
         printf("%06d %s %d %d\n", k, e.name.c_str(), e.height, e.weight);
     }
