@@ -28,7 +28,7 @@ template <typename T, T (*op)(T, T), T (*e)()> class SegmentTree {
     void update(int i, T k) { // 单点修改
         dat[i += n - 1] = k;
         for (int p = i >> 1; p; p >>= 1)
-            dat[p] = op(dat[ls(p)], dat[(rs(p))]);
+            dat[p] = op(dat[ls(p)], dat[rs(p)]);
     }
     T query(int a, int b) { return query(a, b, 1, 1, n); } // 区间查询[a,b]
     T query(int a, int b, int p, int l, int r) {
