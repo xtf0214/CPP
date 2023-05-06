@@ -5,8 +5,8 @@ template <typename T, T (*op)(T, T), T (*e)()> class SegmentTree {
     vector<T> dat, tag;
     int ls(int p) { return p << 1; }
     int rs(int p) { return p << 1 | 1; }
-    int bit_ceil(int n) { return 1 << 32 - __builtin_clz(n - 1); }
-    void mark(int p, int l, int r, int k) { l == r ? 0 : tag[p] += k, dat[p] += k * (r - l + 1); }
+    int bCeil(int n) { return 1 << 32 - __builtin_clz(n - 1); }
+    void mark(int p, int l, int r, int k) { tag[p] += k, dat[p] += k * (r - l + 1); }
     void push_down(int p, int l, int r) {
         if (tag[p]) {
             int m = (l + r) >> 1;
@@ -17,7 +17,7 @@ template <typename T, T (*op)(T, T), T (*e)()> class SegmentTree {
     }
 
   public:
-    SegmentTree(const vector<T> &v) : n(bit_ceil(v.size())), dat(2 * n, e()), tag(2 * n) {
+    SegmentTree(const vector<T> &v) : n(bCeil(v.size())), dat(2 * n, e()), tag(2 * n) {
         copy(v.begin(), v.end(), dat.begin() + n);
         for (int i = n - 1; i >= 1; i--)
             dat[i] = op(dat[ls(i)], dat[rs(i)]);

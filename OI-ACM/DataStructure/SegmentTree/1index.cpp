@@ -6,11 +6,11 @@ template <typename T, T (*op)(T, T), T (*e)()> class SegmentTree {
     vector<T> dat;
     int ls(int p) { return p << 1; }
     int rs(int p) { return p << 1 | 1; }
-    int bit_ceil(int n) { return 1 << 32 - __builtin_clz(n - 1); }
+    int bCeil(int n) { return 1 << 32 - __builtin_clz(n - 1); }
 
   public:
-    SegmentTree(int len) : n(bit_ceil(len)), dat(2 * n, e()) {}
-    SegmentTree(const vector<T> &v) : n(bit_ceil(v.size())), dat(2 * n, e()) {
+    SegmentTree(int len) : n(bCeil(len)), dat(2 * n, e()) {}
+    SegmentTree(const vector<T> &v) : n(bCeil(v.size())), dat(2 * n, e()) {
         copy(v.begin(), v.end(), dat.begin() + n); // [1,n-1]为枝,[n,2*n-1]为叶
         for (int p = n - 1; p >= 1; p--)
             dat[p] = op(dat[ls(p)], dat[rs(p)]);

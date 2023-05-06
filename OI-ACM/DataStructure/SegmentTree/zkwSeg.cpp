@@ -4,11 +4,11 @@ using namespace std;
 template <typename T, T (*op)(T, T), T (*e)()> class SegmentTree {
     int n;
     vector<T> dat;
-    int bit_ceil(int n) { return 1 << 32 - __builtin_clz(n - 1); }
+    int bCeil(int n) { return 1 << 32 - __builtin_clz(n - 1); }
 
   public:
-    SegmentTree(const int _n) : n(bit_ceil(_n)), dat(n << 1, e()) {}
-    SegmentTree(const vector<T> &v) : n(bit_ceil(v.size())), dat(n << 1, e()) {
+    SegmentTree(const int _n) : n(bCeil(_n)), dat(n << 1, e()) {}
+    SegmentTree(const vector<T> &v) : n(bCeil(v.size())), dat(n << 1, e()) {
         copy(v.begin(), v.end(), dat.begin() + n);
         for (int p = n - 1; p; p--)
             dat[p] = op(dat[p << 1], dat[p << 1 | 1]);
