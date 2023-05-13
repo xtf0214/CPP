@@ -107,11 +107,16 @@ for (int t = __lg(m) + 1; t >= 0; t--)
 
 差分: $df_i=a_i-a_{i-1}$
 
-差分区间修改: $\mathrm{add}(l,r,k)\to 
+差分区间修改:
+
+$$
+\mathrm{add}(l,r,k)\to 
 \begin{cases}
 df_l\gets df_l+k\\
 df_{r+1}\gets df_{r+1}-k
-\end{cases}$
+\end{cases}
+$$
+
 
 ### 二维
 
@@ -119,50 +124,82 @@ df_{r+1}\gets df_{r+1}-k
 
 差分: $df_{i,j}=a_{i,j}-a_{i-1,j}-a_{i,j-1}+a_{i-1,j-1}$
 
-差分区间修改: $\mathrm{add}((x_1,y_1),(x_2,y_2),k)\to 
+差分区间修改:
+
+$$
+\mathrm{add}((x_1,y_1),(x_2,y_2),k)\to 
 \begin{cases}
 df_{x_1,y_1}\gets df_{x_1,y_1}+k \\
 df_{x_1,y_2+1}\gets df_{x_1,y_2+1}-k\\
 df_{x_2+1,y1}\gets df_{x_2+1,y1}-k\\
 df_{x_2+1,y_2+1}\gets df_{x_2+1,y_2+1}+k
 \end{cases}
-$
+$$
+
 
 ### 高维
 
 前缀和: 
 
-- 容斥原理: $\mathop{\mathrm{for}}\limits_{s\in U}\ pr_{s}=\sum\limits_{r=\underbrace{00\cdots 01}_{n}}^{\overbrace{11\cdots 11}^{n}} (-1)^{\mathrm{popcount}(r)+1}pr_{s-r}+a_s$， 其中 $s-r$ 表示按位减
+- 容斥原理:
 
-- SOS DP：$\mathop{\mathrm{for}}\limits_{i=1}^{n}\ \mathop{\mathrm{for}}\limits_{s\in U}\ pr_s\gets pr_s+pr_r$， 其中 $r\gets s,r_i\gets r_i-1$
+$$
+\mathop{\mathrm{for}}\limits_{s\in U}\ pr_{s}=a_{s}+\sum\limits_{r=\underbrace{00\cdots 01}_{n}}^{\overbrace{11\cdots 11}^{n}} (-1)^{\mathrm{popcount}(r)+1}pr_{s-r}，s-r 表示按位减
+$$
 
-- 对于每一维度空间都是2的情况，有 $\mathop{\mathrm{for}}\limits_{i=1}^{n}\ \mathop{\mathrm{for}}\limits_{s\in U}\ pr_s\gets pr_s+pr_{s\oplus (1<<i)}\ \mathrm{if}\ s_i=1$
 
-差分: $\mathop{\mathrm{for}}\limits_{s\in U}\ df_{s}=\sum\limits_{r=\underbrace{00\cdots 01}_{n}}^{\overbrace{11\cdots 11}^{n}} (-1)^{\mathrm{popcount}(r)}a_{s-r}+a_s$
+- SOS DP:
+
+$$
+\mathop{\mathrm{for}}\limits_{i=1}^{n}\ \mathop{\mathrm{for}}\limits_{s\in U}\ pr_s\gets pr_s+pr_r， r\gets s,r_i\gets r_i-1
+$$
+
+
+- 对于每一维度空间都是2的情况，有
+
+$$
+\mathop{\mathrm{for}}\limits_{i=1}^{n}\ \mathop{\mathrm{for}}\limits_{s\in U}\ pr_s\gets pr_s+pr_{s\oplus (1<<i)}\ \mathrm{if}\ s_i=1
+$$
+
+
+差分:
+
+$$
+\mathop{\mathrm{for}}\limits_{s\in U}\ df_{s}=a_{s}+\sum\limits_{r=\underbrace{00\cdots 01}_{n}}^{\overbrace{11\cdots 11}^{n}} (-1)^{\mathrm{popcount}(r)}a_{s-r}
+$$
 
 ### 树上
 
 前缀和: 设 $pr_i$ 表示结点 $i$ 到根节点的权值总和。
 
-- 若是点权，$x,y$ 路径上的和为 $pr_x + pr_y - pr_{lca} - pr_{fa(lca)}$。
-- 若是边权，$x,y$ 路径上的和为 $pr_x + pr_y - 2\cdot pr_{lca}$。
+- 若是点权， $x,y$ 路径上的和为 $pr_x + pr_y - pr_{lca} - pr_{fa(lca)}$。
+- 若是边权， $x,y$ 路径上的和为 $pr_x + pr_y - 2\cdot pr_{lca}$。
 
 差分: 
 
 对于一次 $\delta(s,t)$ 的访问
 
-- 点差分: $\begin{cases}
+- 点差分:
+
+$$
+\begin{cases}
 d_s\gets d_s+1\\
 d_{lca}\gets d_{\textit{lca}}-1\\
 d_t\gets d_t+1\\
 d_{fa(lca)}\gets d_{fa(lca)}-1\\
-\end{cases}$
+\end{cases}
+$$
 
-- 边差分: $\begin{cases}
+- 边差分:
+
+$$
+\begin{cases}
 d_s\gets d_s+1\\
 d_t\gets d_t+1\\
 d_{lca}\gets d_{lca}-2\\
-\end{cases}$
+\end{cases}
+$$
+
 
 ## 离散化
 
@@ -452,6 +489,68 @@ template <typename T> class SegmentTree {
 ```
 
 ### 可持久化线段树/主席树
+
+查询区间第 $k$ 小: $O(m\log n)$
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 2e5 + 5;
+int cnt = 0;
+int a[N], b[N], root[N];
+struct Node {
+    int l, r, sum;
+} tree[N << 5];
+
+int update(int pre, int pl, int pr, int k) {
+    int rt = ++cnt;
+    tree[rt].l = tree[pre].l;
+    tree[rt].r = tree[pre].r;
+    tree[rt].sum = tree[pre].sum + 1;
+    if (pl == pr)
+        return rt;
+    int mid = (pl + pr) >> 1;
+    if (k <= mid)
+        tree[rt].l = update(tree[pre].l, pl, mid, k);
+    else
+        tree[rt].r = update(tree[pre].r, mid + 1, pr, k);
+    return rt;
+}
+int query(int u, int v, int pl, int pr, int k) {
+    if (pl == pr)
+        return pl;
+    int x = tree[tree[v].l].sum - tree[tree[u].l].sum;
+    int mid = (pl + pr) >> 1;
+    if (k <= x)
+        return query(tree[u].l, tree[v].l, pl, mid, k);
+    else
+        return query(tree[u].r, tree[v].r, mid + 1, pr, k - x);
+}
+int main() {
+    int n, m;
+    cin >> n >> m;
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
+        b[i] = a[i];
+    }
+
+    sort(b + 1, b + 1 + n);
+    int size = unique(b + 1, b + 1 + n) - (b + 1);
+    for (int i = 1; i <= n; i++)
+        a[i] = lower_bound(b + 1, b + 1 + size, a[i]) - b;
+
+    for (int i = 1; i <= n; i++) {
+        root[i] = update(root[i - 1], 1, size, a[i]);
+    }
+    while (m--) {
+        int x, y, k;
+        cin >> x >> y >> k;
+        int t = query(root[x - 1], root[y], 1, size, k);
+        cout << b[t] << endl;
+    }
+    return 0;
+}
+```
 
 ## 分块与莫队算法
 
