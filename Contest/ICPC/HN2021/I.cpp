@@ -4,20 +4,28 @@ using namespace std;
 vector<int> G[10];
 bool vis[10];
 
-bool dfs(int u) {
-    if (vis[u])
-        return false;
+void dfs(int u) {
+    vis[u] = true;
     for (int v : G[u])
-        dfs(v);
+        if (!vis[v])
+            dfs(v);
 }
 void solve() {
     memset(vis, 0, sizeof(vis));
     int st;
-    for (int i = 1; i <= 8; i++) {
-        cin >> vis[i];
-    }
-
-
+    string s;
+    cin >> s;
+    for (int i = 0; i < 8; i++)
+        vis[i + 1] = s[i] - '0';
+    for (int i = 1; i <= 8; i++)
+        if (!vis[i]) {
+            dfs(i);
+            break;
+        }
+    if (count(vis + 1, vis + 1 + 8, 0))
+        puts("No");
+    else
+        puts("Yes");
 }
 
 int main() {
