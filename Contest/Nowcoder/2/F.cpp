@@ -1,62 +1,32 @@
+/**
+ * @file    :   F 手办
+ * @author  :   Tanphoon
+ * @date    :   2023/05/18 02:55
+ * @version :   2023/05/18 02:55
+ * @link    :   https://ac.nowcoder.com/acm/contest/37344/F
+ */
 #include <bits/stdc++.h>
-#include "D:\Code\CPP\Debug\timer.h"
 using namespace std;
-using pii = pair<int, int>;
-const int MAX = 1e9 + 5;
-bool pow3[MAX];
-vector<pii> p;
-int res = 0;
-int fastPow(int x, int n)
-{
-    int s = 1;
-    for (; n; n >>= 1, x = x * x)
-        if (n & 1)
-            s *= x;
-    return s;
-}
-void dfs(int k = 0, int s = 1)
-{
-    if (k == p.size())
-    {
-        // cout << s << endl;
-        if (pow3[s])
-        {
-            res++;
+using ll = long long;
+void solve() {
+    ll n, ans = 1;
+    cin >> n;
+    for (ll i = 2, cnt; i * i * i <= n; i++) {
+        if (n % i == 0) {
+            for (cnt = 0; n % i == 0; cnt++)
+                n /= i;
+            ans *= (cnt / 3 + 1);
         }
-        return;
     }
-    for (int i = 0; i < p[k].second; i++)
-        dfs(k + 1, s * fastPow(p[k].first, i));
+    // for (ll i = 1; i * i * i <= n; i++)
+    //     if (n % (i * i * i) == 0)
+    //         ans++;
+    cout << ans << '\n';
 }
-int main()
-{
-    int T, n, x;
-    double t1 = getTime();
-    for (int i = 1, mul = 1, sq; mul <= 1e9; mul = i * i * i, sq = sqrt(mul), i++)
-        if (sqrt(mul) == sq)
-            pow3[sq] = true;
-    for (int i = 0; i < MAX; i++)
-        if (pow3[i])
-            cout << i << endl;
-    double t2 = getTime();
-    cout << t2 - t2 << endl;
+
+int main() {
+    int T;
     cin >> T;
     while (T--)
-    {
-        cin >> n;
-        x = n;
-        p.clear();
-        for (int i = 2; i * i <= x; i++)
-            if (x % i == 0)
-            {
-                int cnt = 0;
-                while (x % i == 0)
-                    x /= i, cnt++;
-                p.push_back({i, cnt});
-            }
-        if (x != 1)
-            p.push_back({x, 1});
-        dfs();
-    }
-    return 0;
+        solve();
 }
