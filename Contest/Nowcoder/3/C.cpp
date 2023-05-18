@@ -1,86 +1,103 @@
-#include <iostream>
+/**
+ * @file    :   C 区间操作
+ * @author  :   Tanphoon
+ * @date    :   2023/05/19 00:14
+ * @version :   2023/05/19 00:14
+ * @link    :   https://ac.nowcoder.com/acm/contest/37782/C
+ */
+#include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
-const int MAXN = 1e6 + 5;
-ll n, m, a[MAXN], dat[MAXN << 2], tag[MAXN << 2];
-inline int ls(int p) { return p << 1; }
-inline int rs(int p) { return p << 1 | 1; }
-inline int getPrimeNum(ll x)
-{
-    int res = 0;
-    for (int i = 2; i * i <= x; i++)
-        for (; x % i == 0; x /= i)
-            res++;
-    if (x > 1)
-        res++;
-    return res;
-}
-void build(int p = 1, int l = 1, int r = n)
-{
-    tag[p] = 0;
-    if (l == r)
-        return void(dat[p] = a[l]);
-    int m = (l + r) >> 1;
-    build(ls(p), l, m);
-    build(rs(p), m + 1, r);
-    dat[p] = dat[ls(p)] + dat[rs(p)];
-}
-inline void mark(int p, int l, int r, int k) { tag[p] += k, dat[p] += k * (r - l + 1); }
-inline void push_down(int p, int l, int r)
-{
-    int m = (l + r) >> 1;
-    mark(ls(p), l, m, tag[p]);
-    mark(rs(p), m + 1, r, tag[p]);
-    tag[p] = 0;
-}
-void update(int nl, int nr, int k, int p = 1, int l = 1, int r = n)
-{
-    if (nl <= l && r <= nr)
-        return void(mark(p, l, r, k));
-    push_down(p, l, r);
-    int m = (l + r) >> 1;
-    if (nl <= m)
-        update(nl, nr, k, ls(p), l, m);
-    if (nr > m)
-        update(nl, nr, k, rs(p), m + 1, r);
-    dat[p] = dat[ls(p)] + dat[rs(p)];
-}
-ll query(int nl, int nr, int p = 1, int l = 1, int r = n)
-{
-    if (nl > r || nr < l)
-        return 0;
-    if (nl <= l && r <= nr)
-        return dat[p];
-    push_down(p, l, r);
-    int m = (l + r) >> 1;
-    ll vl = query(nl, nr, ls(p), l, m);
-    ll vr = query(nl, nr, rs(p), m + 1, r);
-    return vl + vr;
-}
-int main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cin >> n;
-    for (int i = 1; i <= n; ++i)
-    {
-        cin >> a[i];
-        a[i] = getPrimeNum(a[i]);
+const int N = 4e6 + 5, INF = 0x3f3f3f3f, mod = 1e9 + 7;
+
+template <typename T> class SegmentTree {
+    struct Node {
+        T dat = 0, tag = 0;
+        Node operator+(const Node &t) { return Node{dat + t.dat, 0}; }
+    };
+    int n;
+    vector<Node> tr;
+    vector<int> l, r;
+    int bCeil(int n) { return 1 << 32 - __builtin_clz(n - 1); }
+    void pushup(int p) { tr[p] = tr[p << 1] + tr[p << 1 | 1]; }
+    void mark(T k, int p) {
+        tr[p].dat += (r[p] - l[p] + 1) * k;
+        tr[p].tag += k;
     }
-    build();
-    cin >> m;
-    while (m--)
-    {
-        int opt, l, r, d;
-        cin >> opt >> l >> r;
-        if (opt == 2)
-        {
-            cin >> d;
-            d = getPrimeNum(d);
-            update(l, r, d);
+    void pushdown(int p) {
+        if (tr[p].tag) {
+            mark(tr[p].tag, p << 1);
+            mark(tr[p].tag, p << 1 | 1);
+            tr[p].tag = 0;
         }
-        else if (opt == 1)
-            cout << query(l, r) << '\n';
+    }
+
+  public:
+    SegmentTree(const vector<T> &v) : n(bCeil(v.size())), tr(n << 1), l(n << 1), r(n << 1) {
+        for (int p = n, i = 0; i < v.size(); i++, p++)
+            tr[p].dat = v[i];
+        for (int p = 2 * n - 1, i = n, d = 1; p; i >>= 1, d <<= 1)
+            for (int j = i - 1; j >= 0; j--, p--) {
+                l[p] = j * d + 1, r[p] = (j + 1) * d;
+                if (p < n)
+                    pushup(p);
+            }
+    }
+    void update(int a, int b, T k, int p = 1) {
+        if (r[p] < a || b < l[p])
+            return;
+        if (a <= l[p] && r[p] <= b)
+            return mark(k, p);
+        pushdown(p);
+        update(a, b, k, p << 1);
+        update(a, b, k, p << 1 | 1);
+        pushup(p);
+    }
+    Node query(int a, int b, int p = 1) {
+        if (r[p] < a || b < l[p])
+            return Node();
+        if (a <= l[p] && r[p] <= b)
+            return tr[p];
+        pushdown(p);
+        Node vl = query(a, b, p << 1);
+        Node vr = query(a, b, p << 1 | 1);
+        return vl + vr;
+    }
+};
+
+int n, q, cnt;
+int f[N], st[N], prime[N];
+int b[N];
+
+void init(int n) {
+    for (int i = 2; i <= n; i++) {
+        if (!st[i])
+            prime[cnt++] = i, f[i] = 1;
+        for (int j = 0; j < cnt && (ll)i * prime[j] <= n; j++) {
+            st[i * prime[j]] = 1;
+            f[i * prime[j]] = f[i] + 1;
+            if (i % prime[j] == 0)
+                break;
+        }
+    }
+}
+int main() {
+    ios::sync_with_stdio(false), cin.tie(nullptr);
+    cin >> n;
+    init(N);
+    for (int i = 1; i <= n; i++)
+        cin >> b[i], b[i] = f[b[i]];
+    SegmentTree<ll> seg(vector<ll>(b + 1, b + 1 + n));
+    cin >> q;
+    while (q--) {
+        int op, l, r, w;
+        cin >> op >> l >> r;
+        if (op == 1) {
+            cout << seg.query(l, r).dat << '\n';
+        } else {
+            cin >> w;
+            seg.update(l, r, f[w]);
+        }
     }
     return 0;
 }
