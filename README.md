@@ -17,9 +17,10 @@ This is all source code written by Tanphoon.
 CPP
 ├─Blog
 ├─Contest
-│  ├─CCPC2022
+│  ├─CCPC
 │  ├─Codeforces
 │  ├─GPLT
+│  ├─ICPC
 │  ├─Lanqiao
 │  ├─Leetcode
 │  ├─Luogu
