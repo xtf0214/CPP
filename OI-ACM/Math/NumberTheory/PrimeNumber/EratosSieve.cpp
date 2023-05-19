@@ -11,7 +11,7 @@ void eratosthenes(int n) {
         if (isPrime[i]) {
             Prime[cnt++] = i;
             for (int j = 2 * i; j <= n; j += i)
-                isPrime[j] = true;
+                isPrime[j] = false;
         }
 }
 int main() {
