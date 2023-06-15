@@ -2,7 +2,7 @@
 
 > 题目链接：[“卓见杯”郑州轻工业大学第十五届程序设计大赛暨河南省高校邀请赛](http://acm.zzuli.edu.cn/problemset.php?search=“卓见杯”郑州轻工业大学第十五届程序设计大赛暨河南省高校邀请赛)
 >
-> 大佬的题解：[“卓见杯”郑州轻工业大学第十五届程序设计大赛暨河南省高校邀请赛题解_WAWA源的博客-CSDN博客](http://t.csdn.cn/anAzA)
+> 大佬的题解：[“卓见杯”郑州轻工业大学第十五届程序设计大赛暨河南省高校邀请赛题解_WAWA源的博客-CSDN博客](http://t.csdn.cn/QhiNi)
 >
 > | 题目                                                         | 算法           |
 > | ------------------------------------------------------------ | -------------- |
@@ -136,6 +136,46 @@ int main() {
         check();
         printf("%s", s + 1);
     }
+    return 0;
+}
+```
+
+# F 莫比乌斯最大值isUsefulAlgorithm
+
+枚举 $a$ 和 $b$ 的最大公因数 $gcd$ 。
+
+然后枚举 $\{a\}$ 和 $\{b\}$ 中 $gcd$ 的最大倍数 $maxa$ , $maxb$ 。答案为 $maxa\cdot maxb\cdot gcd$
+
+时间复杂度：
+
+调和级数 $O(n\log n)$
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+const int N = 1e5 + 5;
+int read(int x = 0) { return cin >> x, x; }
+
+int n, a[N], b[N];
+ll ans;
+int main() {
+    cin >> n;
+    for (int i = 1; i <= n; i++) 
+        a[read()] = 1;
+    for (int j = 1; j <= n; j++)
+        b[read()] = 1;
+    for (int i = 1; i <= 100000; i++) {
+        ll maxa = 0, maxb = 0;
+        for (int j = i; j <= 100000; j += i) {
+            if (a[j])
+                maxa = j;
+            if (b[j])
+                maxb = j;
+        }
+        ans = max(ans, maxa * maxb * i);
+    }
+    cout << ans;
     return 0;
 }
 ```
