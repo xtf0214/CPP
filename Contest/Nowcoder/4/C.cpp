@@ -1,24 +1,32 @@
+/** 
+ * @file    :   C 最大公因数
+ * @author  :   Tanphoon 
+ * @date    :   2023/06/16 20:52
+ * @version :   2023/06/16 20:52
+ * @link    :   https://ac.nowcoder.com/acm/contest/38487/C
+ */
 #include <bits/stdc++.h>
 using namespace std;
-const int MAXN = 10000 + 5;
-int T, a, b, x;
-void solve()
-{
+
+void solve() {
+    int a, b, x;
     cin >> a >> b >> x;
     if (a > b)
         swap(a, b);
-    if (b - a < x)
-        return void(cout << -1 << endl);
+    if (b - a < x) {
+        cout << -1 << '\n';
+        return;
+    }
     if (a % x != 0)
         a = (a / x + 1) * x;
-    if (a + x > b)
-        return void(cout << -1 << endl);
-    cout << a << " " << a + x << endl;
+    if (a + x > b) {
+        cout << -1 << '\n';
+        return;
+    }
+    cout << a << " " << a + x << '\n';
 }
-int main()
-{
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+int main() {
+    int T = 1;
     cin >> T;
     while (T--)
         solve();
