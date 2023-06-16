@@ -1,48 +1,52 @@
+/**
+ * @file    :   G 迷宫
+ * @author  :   Tanphoon
+ * @date    :   2023/06/16 20:54
+ * @version :   2023/06/16 20:54
+ * @link    :   https://ac.nowcoder.com/acm/contest/38487/G
+ */
 #include <bits/stdc++.h>
 using namespace std;
-using pii = pair<int, int>;
-using Node = pair<int, pii>;
-const int N = 2000 + 5, INF = 0x3f3f3f3f;
+const int N = 2e3 + 5;
+
+struct Node {
+    int y, x, w;
+    friend bool operator<(const Node &a, const Node &b) { return a.w > b.w; } // 小根堆大于号
+};
+
 int n, m;
 char G[N][N];
 bool vis[N][N];
-int d[N][N];
-int vec[4][2] = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
+int way[4][2]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
-void solve()
-{
-    priority_queue<Node, vector<Node>, greater<Node>> q;
-    memset(d, 0x3f, sizeof(d));
-    q.push({0, {0, 0}});
-    d[0][0] = 0;
-    while (!q.empty())
-    {
-        auto [cy, cx] = q.top().second;
+int bfs() {
+    priority_queue<Node> q;
+    q.push({1, 1, 0});
+    vis[1][1] = true;
+    while (!q.empty()) {
+        auto [y, x, w] = q.top();
         q.pop();
-        if (vis[cy][cx])
-            continue;
-        vis[cy][cx] = true;
-        for (auto &[ny, nx] : vec)
-        {
-            int ty = cy + nx, tx = cx + ny;
-            if (ty < 0 || ty >= n || tx < 0 || tx >= m || G[ty][tx] == '#')
+        if (y == n && x == m)
+            return w;
+        for (auto &[ty, tx] : way) {
+            int ny = y + ty, nx = x + tx;
+            if (ny < 1 || ny > n || nx < 1 || nx > m || vis[ny][nx] || G[ny][nx] == '#')
                 continue;
-            int cost = G[ty][tx] != '*';
-            if (d[ty][tx] > d[cy][cx] + cost)
-                q.push({d[ty][tx] = d[cy][cx] + cost, {ty, tx}});
+            vis[ny][nx] = true;
+            if (G[ny][nx] == '*')
+                q.push({ny, nx, w});
+            else
+                q.push({ny, nx, w + 1});
         }
     }
-    cout << ((d[n - 1][m - 1] == INF) ? -1 : d[n - 1][m - 1]) << endl;
-    // for (int i = 0; i < n; i++)
-    //     for (int j = 0; j < m; j++)
-    //         cout << d[i][j] << " \n"[j == m - 1];
+    return -1;
 }
-int main()
-{
+
+int main() {
     cin >> n >> m;
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < m; j++)
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= m; j++)
             cin >> G[i][j];
-    solve();
+    cout << bfs() << '\n';
     return 0;
 }
