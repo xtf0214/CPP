@@ -4,7 +4,7 @@ struct DisjointSet {
     vector<int> p;
     DisjointSet(int n = 1e6) : p(n) { iota(p.begin(), p.end(), 0); }
     int find(int x) { return x == p[x] ? x : p[x] = find(p[x]); }
-    void unite(int x, int y) { find(x) != find(y) ? p[find(x)] = find(y) : 0; }
+    void unite(int x, int y) { p[find(x)] = find(y); }
 };
 int main() {
     int n, a, b, q, op;
