@@ -1,39 +1,46 @@
+/**
+ * @file    :   K 试稥
+ * @author  :   Tanphoon
+ * @date    :   2023/06/19 11:26
+ * @version :   2023/06/19 11:26
+ * @link    :   https://ac.nowcoder.com/acm/contest/38487/K
+ */
 #include <bits/stdc++.h>
-#define lowbit(x) x & -x
 using namespace std;
 using ll = long long;
-const int N = 100 + 5;
-void solve()
-{
+#define lowbit(x) (x & -x)
+const int N = 1e2 + 5;
+
+void solve() {
     int n;
+    ll x;
+    cin >> n >> x;
     bool a[N]{0};
     int id[N]{0};
-    ll x, t;
-    cin >> n >> x;
-    for (int i = 1; i <= n; i++)
-    {
+    for (int i = 1; i <= n; i++) {
+        ll t;
         cin >> t;
         t = __lg(t);
-        a[t] = true;
+        a[t] = 1;
         id[t] = i;
     }
     vector<int> ans;
-    for (int i; x; x -= lowbit(x))
-    {
+    for (int i; x; x -= lowbit(x)) {
         i = __lg(lowbit(x));
-        if (!a[i])
-            return void(cout << -1 << endl);
+        if (!a[i]) {
+            cout << -1 << '\n';
+            return;
+        }
         ans.push_back(id[i]);
     }
     sort(ans.begin(), ans.end());
-    cout << ans.size() << endl;
+    cout << ans.size() << '\n';
     for (int i : ans)
-        cout << i << " ";
-    cout << endl;
+        cout << i << ' ';
+    cout << '\n';
 }
-int main()
-{
-    int T, n;
+int main() {
+    int T = 1;
     cin >> T;
     while (T--)
         solve();
