@@ -1,6 +1,6 @@
-/** 
+/**
  * @file    :   NodeSegChange
- * @author  :   Tanphoon 
+ * @author  :   Tanphoon
  * @date    :   2023/07/14 01:25
  * @version :   2023/07/14 01:25
  * @link    :   https://www.luogu.com.cn/problem/P3374
@@ -9,35 +9,35 @@
 using namespace std;
 using ll = long long;
 
+struct Node {
+    int l = 0, r = 0;
+    ll dat = 0;
+    friend Node operator+(const Node &a, const Node &b) {
+        if (a.l == 0 || b.l == 0)
+            return a.l == 0 ? b : a;
+        return Node{a.l, b.r, a.dat + b.dat};
+    }
+};
 template <typename T> class SegmentTree {
-    struct Node {
-        int l = 0, r = 0;
-        T dat = 0;
-        friend Node operator+(const Node &a, const Node &b) {
-            if (a.l == 0 || b.l == 0)
-                return a.l == 0 ? b : a;
-            return Node{a.l, b.r, a.dat + b.dat};
-        }
-    };
     int n;
     vector<Node> tr;
+    const vector<T> &v;
     int bCeil(int n) { return 1 << 32 - __builtin_clz(n - 1); }
-
-  public:
-    SegmentTree(const vector<T> &v) : n(bCeil(v.size())), tr(n << 1) {
-        for (int p = n, i = 0; i < v.size(); i++, p++)
-            tr[p].dat = v[i];
-        build(1, 1, n);
-    }
     void build(int p, int l, int r) {
-        tr[p].l = l, tr[p].r = r;
-        if (l != r) {
+        if (l == r) {
+            tr[p].l = l, tr[p].r = r;
+            if (l <= v.size())
+                tr[p].dat = v[l - 1];
+        } else {
             int m = (l + r) >> 1;
             build(p << 1, l, m);
             build(p << 1 | 1, m + 1, r);
             tr[p] = tr[p << 1] + tr[p << 1 | 1];
         }
     }
+
+  public:
+    SegmentTree(const vector<T> &v) : n(bCeil(v.size())), tr(n << 1), v(v) { build(1, 1, n); }
     void change(int i, T k, int p = 1) {
         if (tr[p].r < i || i < tr[p].l)
             return;
