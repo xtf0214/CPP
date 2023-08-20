@@ -14,7 +14,6 @@ template <typename T> class SegmentTree {
     };
     int n;
     vector<Node> tr;
-    int bCeil(int n) { return 1 << 32 - __builtin_clz(n - 1); }
     void mark(T k, int p) {
         tr[p].dat += (tr[p].r - tr[p].l) * k;
         tr[p].tag += k;
@@ -28,7 +27,7 @@ template <typename T> class SegmentTree {
     }
 
   public:
-    SegmentTree(const vector<T> &v) : n(bCeil(v.size())), tr(n << 1) {
+    SegmentTree(const vector<T> &v) : n(2 << __lg(v.size() - 1)), tr(n << 1) {
         for (int p = n - 1, i = 0; i < v.size(); i++, p++)
             tr[p].dat = v[i];
         build(0, 0, n);

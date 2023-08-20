@@ -14,7 +14,7 @@ struct Node {
     ll dat = 0;
     friend Node operator+(const Node &a, const Node &b) {
         if (a.l == 0 || b.l == 0)
-            return a.l == 0 ? b : a;
+            return a.l ? a : b;
         return Node{a.l, b.r, a.dat + b.dat};
     }
 };
@@ -22,7 +22,6 @@ template <typename T> class SegmentTree {
     int n;
     vector<Node> tr;
     const vector<T> &v;
-    int bCeil(int n) { return 1 << 32 - __builtin_clz(n - 1); }
     void build(int p, int l, int r) {
         if (l == r) {
             tr[p].l = l, tr[p].r = r;
@@ -37,7 +36,7 @@ template <typename T> class SegmentTree {
     }
 
   public:
-    SegmentTree(const vector<T> &v) : n(bCeil(v.size())), tr(n << 1), v(v) { build(1, 1, n); }
+    SegmentTree(const vector<T> &v) : n(2 << __lg(v.size() - 1)), tr(n << 1), v(v) { build(1, 1, n); }
     void change(int i, T k, int p = 1) {
         if (tr[p].r < i || i < tr[p].l)
             return;
