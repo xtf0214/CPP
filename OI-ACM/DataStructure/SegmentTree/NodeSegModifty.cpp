@@ -2,7 +2,7 @@
  * @file    :   NodeSegModifty
  * @author  :   Tanphoon
  * @date    :   2023/07/14 01:25
- * @version :   2023/07/14 01:25
+ * @version :   2023/08/22 16:19
  * @link    :   https://www.luogu.com.cn/problem/P3372
  */
 #include <bits/stdc++.h>
@@ -21,12 +21,9 @@ struct Node {
 template <typename T> class SegmentTree {
     int n;
     vector<Node> tr;
-    const vector<T> &v;
     void build(int p, int l, int r) {
         if (l == r) {
             tr[p].l = l, tr[p].r = r;
-            if (l <= v.size())
-                tr[p].dat = v[l - 1];
         } else {
             int m = (l + r) >> 1;
             build(p << 1, l, m);
@@ -47,7 +44,7 @@ template <typename T> class SegmentTree {
     }
 
   public:
-    SegmentTree(const vector<T> &v) : n(2 << __lg(v.size() - 1)), tr(n << 1), v(v) { build(1, 1, n); }
+    SegmentTree(int len) : n(2 << __lg(len - 1)), tr(n << 1) { build(1, 1, n); }
     void modifty(int a, int b, T k, int p = 1) {
         if (tr[p].r < a || b < tr[p].l)
             return;
@@ -68,34 +65,18 @@ template <typename T> class SegmentTree {
         Node vr = query(a, b, p << 1 | 1);
         return vl + vr;
     }
-    // void modifty(int a, int b, T k, int p = 1) {
-    //     if (a <= tr[p].l && tr[p].r <= b)
-    //         return mark(k, p);
-    //     pushdown(p);
-    //     int mid = (tr[p].l + tr[p].r) >> 1;
-    //     if (a <= mid) modifty(a, b, k, p << 1); // 左半区间与修改区间相交
-    //     if (b > mid) modifty(a, b, k, p << 1 | 1); // 右半区间与修改区间相交
-    //     tr[p] = tr[p << 1] + tr[p << 1 | 1];
-    // }
-    // Node query(int a, int b, int p = 1) {
-    //     if (a <= tr[p].l && tr[p].r <= b)
-    //         return tr[p];
-    //     pushdown(p);
-    //     int mid = (tr[p].l + tr[p].r) >> 1;
-    //     if (b <= mid) return query(a, b, p << 1); // 只有左半区间与查询区间相交
-    //     else if (a > mid) return query(a, b, p << 1 | 1); // 只有右半区间与查询区间相交
-    //     else return query(a, b, p << 1) + query(a, b, p << 1 | 1); // (a <= mid < b) 两端区间都与查询区间相交
-    // }
 };
 
 int main() {
     ios::sync_with_stdio(false);
     int n, m;
     cin >> n >> m;
-    vector<ll> arr(n);
-    for (int i = 0; i < n; ++i)
-        cin >> arr[i];
-    SegmentTree<ll> seg(arr);
+    SegmentTree<ll> seg(n);
+    for (int i = 1; i <= n; i++) {
+        ll x;
+        cin >> x;
+        seg.modifty(i, i, x);
+    }
     while (m--) {
         int op, l, r, d;
         cin >> op >> l >> r;

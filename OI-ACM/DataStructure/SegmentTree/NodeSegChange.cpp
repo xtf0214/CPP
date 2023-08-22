@@ -2,7 +2,7 @@
  * @file    :   NodeSegChange
  * @author  :   Tanphoon
  * @date    :   2023/07/14 01:25
- * @version :   2023/07/14 01:25
+ * @version :   2023/08/22 16:19
  * @link    :   https://www.luogu.com.cn/problem/P3374
  */
 #include <bits/stdc++.h>
@@ -21,12 +21,9 @@ struct Node {
 template <typename T> class SegmentTree {
     int n;
     vector<Node> tr;
-    const vector<T> &v;
     void build(int p, int l, int r) {
         if (l == r) {
             tr[p].l = l, tr[p].r = r;
-            if (l <= v.size())
-                tr[p].dat = v[l - 1];
         } else {
             int m = (l + r) >> 1;
             build(p << 1, l, m);
@@ -36,7 +33,7 @@ template <typename T> class SegmentTree {
     }
 
   public:
-    SegmentTree(const vector<T> &v) : n(2 << __lg(v.size() - 1)), tr(n << 1), v(v) { build(1, 1, n); }
+    SegmentTree(int len) : n(2 << __lg(len - 1)), tr(n << 1) { build(1, 1, n); }
     void change(int i, T k, int p = 1) {
         if (tr[p].r < i || i < tr[p].l)
             return;
@@ -61,10 +58,12 @@ int main() {
     ios::sync_with_stdio(false);
     int n, m;
     cin >> n >> m;
-    vector<ll> arr(n);
-    for (int i = 0; i < n; ++i)
-        cin >> arr[i];
-    SegmentTree<ll> seg(arr);
+    SegmentTree<ll> seg(n);
+    for (int i = 1; i <= n; i++) {
+        ll x;
+        cin >> x;
+        seg.change(i, x);
+    }
     while (m--) {
         int op, l, r, x, k;
         cin >> op;
