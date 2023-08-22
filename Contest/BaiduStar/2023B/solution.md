@@ -43,17 +43,21 @@ $a$ 为 $x[]$ 的中位数时，$f(a)$ 和 $g(a)$ 取最小值。
 根据题意列方程：
 
 $\begin{cases}
-x+y+z=m \\
-ax+by+cz=n
+x+y+z=p \\
+n_1x+n_2y+n_3z=q
 \end{cases}$
 
-消元 $x$ 得： $(b-a)y+(c-a)z=n-am$ 
+消元 $x$ 得： $(n_3-n_1)y+(n_3-n_2)z=q-n_1\cdot p$ 
 
-用扩展欧几里得算法求解一个特解 $(y_0,z_0)$ ,令 $A = b - a, B = c - a, d = \gcd(A, B)$ , 则 $Ay+Bz=n-am$
+令 $a=n_3-n_1, b=n_2-n_1, c=q-n_1\cdot p, d=\gcd(a,b)$ , 则 $ay+bz=c$
+
+用扩展欧几里得算法求解一个特解 $(y_0,z_0)$ 
+
+沿着直线移动可以获得所有非负整数解
 
 $\begin{cases}
-y=y_0+\dfrac{B}{d}t \\
-z=z_0-\dfrac{A}{d}t \\
+y=y_0+\dfrac{b}{d}t \\
+z=z_0-\dfrac{a}{d}t \\
 \end{cases}$
 
-小D想和你玩个游戏，游戏规则如下：
+其中 $t\in\left[\lceil\dfrac{y_0-0}{-b/d}\rceil,\lfloor\dfrac{z_0-0}{a/d}\rfloor\right]$

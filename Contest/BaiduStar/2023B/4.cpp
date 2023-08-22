@@ -1,3 +1,10 @@
+/** 
+ * @file    :   4
+ * @author  :   Tanphoon 
+ * @date    :   2023/08/22 16:07
+ * @version :   2023/08/22 16:07
+ * @link    :   https://www.matiji.net/exam/brushquestion/12/4347/179CE77A7B772D15A8C00DD8198AAC74?from=1
+ */
 #include <bits/stdc++.h>
 using namespace std;
 int main() {
