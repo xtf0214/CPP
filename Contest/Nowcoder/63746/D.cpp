@@ -34,7 +34,7 @@ int main() {
         return true;
     };
     int l = -1, r = m, mid;
-    while (r - l > 1) 
+    while (r - l > 1)
         check(mid = (l + r) / 2) ? l = mid : r = mid;
     if (r == m)
         cout << 0 << '\n';
