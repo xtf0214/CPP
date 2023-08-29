@@ -31,7 +31,7 @@ void solve(int n) {
     vector<array<int, 3>> edges;
     for (int i = 1; i <= n; i++)
         for (int j = i + 1; j <= n; j++)
-                edges.push_back({i, j, i & j});
+            edges.push_back({i, j, i & j});
     int s = kruskal(edges, n);
     if (s) {
         cout << n << " " << s << '\n';
