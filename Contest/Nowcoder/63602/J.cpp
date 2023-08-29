@@ -1,6 +1,6 @@
-/** 
+/**
  * @file    :   J
- * @author  :   Tanphoon 
+ * @author  :   Tanphoon
  * @date    :   2023/08/16 13:18
  * @version :   2023/08/16 13:18
  * @link    :   https://ac.nowcoder.com/acm/contest/63602/J
@@ -18,7 +18,7 @@ int main() {
     for (int i = 1; i <= m; i++)
         cin >> b[i];
     cin >> x;
-    vector<vector<int>> c(n + 1, vector<int> (m + 1));
+    vector<vector<int>> c(n + 1, vector<int>(m + 1));
     for (int i = 1; i <= n; i++)
         for (int j = 1; j <= m; j++)
             c[i][j] = a[i] * b[j];
@@ -33,7 +33,7 @@ int main() {
                 for (int tj = 1; tj <= m; tj++) {
                     int sum = s[ti][tj] - s[ti][sj - 1] - s[si - 1][tj] + s[si - 1][sj - 1];
                     if (sum <= x) {
-                        ans = max(ans, (ti - si + 1) * (tj - sj + 1));        
+                        ans = max(ans, (ti - si + 1) * (tj - sj + 1));
                     }
                 }
     cout << ans << '\n';
