@@ -1,3 +1,10 @@
+/**
+ * @file    :   F
+ * @author  :   Tanphoon
+ * @date    :   2023/08/29 15:54
+ * @version :   2023/08/29 15:54
+ * @link    :   https://ac.nowcoder.com/acm/contest/39114/F
+ */
 #include <bits/stdc++.h>
 using namespace std;
 int main() {
