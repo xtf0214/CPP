@@ -1,30 +1,36 @@
+/** 
+ * @file    :   A
+ * @author  :   Tanphoon 
+ * @date    :   2024/01/11 21:25
+ * @version :   2024/01/11 21:25
+ * @link    :   https://codeforces.com/contest/1714/problem/A
+ */
 #include <bits/stdc++.h>
-#define fr first
-#define sc second
 using namespace std;
-using ll = long long;
-using pii = pair<int, int>;
-const int N = 1e6 + 5, INF = 0x3f3f3f3f, mod = 1e9 + 7;
-void print(int it) { cout << it << " "; }
-void solve()
-{
-    int n, H, M, t1, t2;
+inline void solve() {
+    int n;
+    int H, M;
     cin >> n >> H >> M;
-    t1 = H * 60 + M;
-    t2 = 0x3f3f3f3f;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> H >> M;
-        t2 = min(t2, H * 60 + M);
+    vector<int> a;
+    for (int i = 0; i < n; i++) {
+        int h, m;
+        cin >> h >> m;
+        a.push_back(h * 60 + m);
     }
+    sort(a.begin(), a.end());
+    for (int x : a) {
+        a.push_back(24 * 60 + x);
+    }
+    int it = *lower_bound(a.begin(), a.end(), H * 60 + M);
+    it -= H * 60 + M;
+    it %= 24 * 60;
+    cout << it / 60 << ' ' << it % 60 << '\n';
 }
-int main()
-{
-    int T;
-    vector<int> a{1, 2, 3};
-    cout << __gcd(961, 432);
-    // cin >> T;
-    // while (T--)
-    //     solve();
+int main() {
+    ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+    int T = 1;
+    cin >> T;
+    while (T--)
+        solve();
     return 0;
 }
