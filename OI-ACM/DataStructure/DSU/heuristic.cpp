@@ -1,9 +1,15 @@
+/** 
+ * @file    :   启发式合并
+ * @author  :   Tanphoon
+ * @date    :   2024/05/30 18:09
+ * @version :   2024/05/30 18:09
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
-struct DisjointSet {
+struct DSU {
     vector<int> rank, p;
-    DisjointSet(int n = 1e6) : p(n), rank(n) { iota(p.begin(), p.end(), 0); }
+    DSU(int n = 1e6) : p(n), rank(n) { iota(p.begin(), p.end(), 0); }
     int find(int x) { return p[x] == x ? x : p[x] = find(p[x]); }
     void unite(int x, int y) {
         x = find(x), y = find(y);
@@ -17,7 +23,7 @@ struct DisjointSet {
 int main() {
     int n, a, b, q, t;
     cin >> n >> q;
-    DisjointSet ds(n);
+    DSU ds(n);
     for (int i = 0; i < q; i++) {
         cin >> t >> a >> b;
         if (t == 0)
