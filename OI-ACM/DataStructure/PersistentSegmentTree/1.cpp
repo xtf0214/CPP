@@ -1,16 +1,13 @@
 /**
- * @file    :   1
+ * @file    :   主席树（void update）
  * @author  :   Tanphoon
  * @date    :   2023/12/13 15:51
  * @version :   2023/12/13 15:51
- * @link    :
+ * @link    :   https://www.luogu.com.cn/problem/solution/P3834
  */
 #include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
-#ifdef _DEBUG
-#include "DEBUG.h"
-#endif
+
 const int N = 2e5 + 5;
 int cnt, rt[N];
 struct Node {

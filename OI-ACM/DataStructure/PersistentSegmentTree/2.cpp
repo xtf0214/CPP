@@ -1,5 +1,5 @@
 /**
- * @file    :   2
+ * @file    :   主席树（int update）
  * @author  :   Tanphoon
  * @date    :   2023/12/13 15:51
  * @version :   2023/12/13 15:51
@@ -7,11 +7,13 @@
  */
 #include <bits/stdc++.h>
 using namespace std;
+
 const int N = 2e5 + 5;
 int cnt, rt[N];
 struct Node {
     int l, r, sum;
 } tr[N << 5];
+
 int kth(int k, int p, int q, int l, int r) {
     if (l == r)
         return l;
