@@ -24,7 +24,7 @@ double rec(int S, int u) {
             res = min(res, rec(S | 1 << v, v) + G[u][v]);
     return dp[S][u] = res;
 }
-void solve() {
+void rec1() {
     dp.assign(1 << n, vector<double>(n, INF));
     for (int i = 0; i < n; i++)
         dp[(1 << n) - 1][i] = 0;

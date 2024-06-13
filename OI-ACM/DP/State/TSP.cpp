@@ -6,7 +6,6 @@
  */
 #include <bits/stdc++.h>
 using namespace std;
-#include <DEBUG.h>
 const int INF = 1e9;
 int n, m;
 vector<vector<int>> G, dp;
@@ -43,7 +42,6 @@ int main() {
         G[u][v] = w;
     }
     cout << rec() << '\n';
-    cout << rec2() << '\n';
     return 0;
 }
 /*
