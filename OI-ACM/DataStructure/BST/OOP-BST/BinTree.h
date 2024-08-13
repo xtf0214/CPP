@@ -1,0 +1,38 @@
+#pragma once
+
+#include "BinNode.h"
+
+template <typename T> class BinTree {
+  public:
+    BinTree() : _root(nullptr), _size(0) {}
+    BinNodePtr<T> root() const { return _root; }
+    int size() { return _size; }
+    template <typename VST> void travPre(const VST &visit) { travIn(_root, visit); }
+    template <typename VST> void travIn(const VST &visit) { travIn(_root, visit); }
+    template <typename VST> void travPost(const VST &visit) { travIn(_root, visit); }
+
+  protected:
+    template <typename VST> void travPre(BinNodePtr<T> cur, const VST &visit) {
+        if (!cur)
+            return;
+        visit(cur);
+        travIn(cur->_lc, visit);
+        travIn(cur->_rc, visit);
+    }
+    template <typename VST> void travIn(BinNodePtr<T> cur, const VST &visit) {
+        if (!cur)
+            return;
+        travIn(cur->_lc, visit);
+        visit(cur);
+        travIn(cur->_rc, visit);
+    }
+    template <typename VST> void travPost(BinNodePtr<T> cur, const VST &visit) {
+        if (!cur)
+            return;
+        travIn(cur->_lc, visit);
+        travIn(cur->_rc, visit);
+        visit(cur);
+    }
+    BinNodePtr<T> _root;
+    int _size;
+};
