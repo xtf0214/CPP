@@ -3,7 +3,6 @@
  * @author  :   Tanphoon
  * @date    :   2023/04/26 01:26
  * @version :   2023/04/26 01:26
- * @link    :
  */
 #include <bits/stdc++.h>
 using namespace std;
@@ -13,33 +12,33 @@ const int N = 1e5 + 5;
 
 int n;
 vector<int> G[N];
-int fa[N][20], dep[N], sum[N];
+int p[N][20], dep[N], sum[N];
 
-void dfs(int u, int pa) {
-    fa[u][0] = pa;
-    for (int i = 1; (1 << i) <= dep[u]; i++)
-        fa[u][i] = fa[fa[u][i - 1]][i - 1];
-    for (auto v : G[u])
-        if (v != pa) {
-            dep[u] = dep[pa] + 1;
-            sum[u] = sum[v] + 1;
+void dfs(int u, int fa) {
+    p[u][0] = fa;
+    dep[u] = dep[fa] + 1;
+    sum[u] = sum[fa] + 1;
+    for (int i = 1; i <= __lg(dep[u]); i++)
+        p[u][i] = p[p[u][i - 1]][i - 1];
+    for (int v : G[u])
+        if (v != fa) {
             dfs(v, u);
         }
 }
 int LCA(int x, int y) {
     if (dep[x] < dep[y])
         swap(x, y);
-    for (int i = 19; i >= 0; i--)
-        if (dep[x] - (1 << i) >= dep[y])
-            x = fa[x][i];
+    for (int i = __lg(dep[x] - dep[y]); i >= 0; i--)
+        if (dep[p[x][i]] >= dep[y])
+            x = p[x][i];
     if (x == y)
         return x;
-    for (int i = 19; i >= 0; i--)
-        if (fa[x][i] != fa[y][i]) {
-            x = fa[x][i];
-            y = fa[y][i];
+    for (int i = __lg(dep[x]); i >= 0; i--)
+        if (p[x][i] != p[y][i]) {
+            x = p[x][i];
+            y = p[y][i];
         }
-    return fa[x][0];
+    return p[x][0];
 }
 int dist(int x, int y) { return sum[x] + sum[y] - 2 * sum[LCA(x, y)]; }
 int main() {
