@@ -13,13 +13,23 @@ int main() {
     AVL<int> avl;
     for (int i = 1; i <= 7; i++) {
         avl.insert(i * 2);
-        BinTreeUtil(avl.root()).show();
+        BinTreeUtil(avl.root()).print(2);
         debug(string(50, '-'));
     }
-    debug(BinTreeUtil(avl.root()).arrayStorage());
+    debug(BinTreeUtil(avl.root()).toArray());
+
+    vector<string> preOrder;
+    avl.travPre([&](BinNodePtr<int> p) { preOrder.push_back(p->val()); });
+    debug(preOrder);
+
     vector<string> inOrder;
     avl.travIn([&](BinNodePtr<int> p) { inOrder.push_back(p->val()); });
     debug(inOrder);
+
+    vector<string> postOrder;
+    avl.travPost([&](BinNodePtr<int> p) { postOrder.push_back(p->val()); });
+    debug(postOrder);
+
     for (int key = 1; key <= 15; key++) {
         auto node1 = avl.search(key);
         auto node2 = avl.find(key, less<int>());
@@ -31,7 +41,7 @@ int main() {
     }
     for (int i = 1; i <= 7; i++) {
         avl.erase(i * 2);
-        BinTreeUtil(avl.root()).show();
+        BinTreeUtil(avl.root()).print(2);
         debug(string(50, '-'));
     }
 }
