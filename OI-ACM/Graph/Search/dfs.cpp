@@ -3,13 +3,13 @@ using namespace std;
 const int N = 20;
 
 int V, E;
-vector<int> adjs[N];
+vector<int> G[N];
 bool vis[N];
 
 void dfs(int u) {
     vis[u] = true;
     cout << u << " ";
-    for (int v : adjs[u])
+    for (int v : G[u])
         if (!vis[v])
             dfs(v);
 }
@@ -18,8 +18,8 @@ int main() {
     fill(vis, vis + V, false);
     for (int i = 0, u, v; i < E; i++) {
         cin >> u >> v;
-        adjs[u].push_back(v);
-        adjs[v].push_back(u);
+        G[u].push_back(v);
+        G[v].push_back(u);
     }
     for (int i = 0; i < V; i++)
         if (!vis[i])
